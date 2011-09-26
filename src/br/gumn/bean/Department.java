@@ -1,12 +1,36 @@
 package br.gumn.bean;
 
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
+@Entity
+@Table(name = "department", schema = "reman")
 public class Department {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String acronym;
 	private String name;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idUniversity", insertable = true, updatable = true)
+	@Fetch(FetchMode.JOIN)
+	@Cascade(CascadeType.ALL)
 	private University university;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "departmentsMembers", schema = "reman", joinColumns = @JoinColumn(name = "department"), inverseJoinColumns = @JoinColumn(name = "researcher"))
 	private List<Researcher> members;
 
 	public int getId() {

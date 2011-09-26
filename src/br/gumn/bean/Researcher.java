@@ -1,10 +1,21 @@
 package br.gumn.bean;
 
 import java.util.List;
-
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import br.gumn.bean.enumeration.Degree;
 
+@Entity
+@Table(name="researcher", schema="reman")
 public class Researcher {
+	@Id
 	private String cpf;
 	private String name;
 	private String rg;
@@ -13,11 +24,22 @@ public class Researcher {
 	private String bankData;
 	private String lattes;
 	private String email;
+	@Enumerated
 	private Degree degree;
+	@OneToOne
+	@JoinColumn(name="user")
 	private User user;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "departmentsMembers", schema = "reman", joinColumns = @JoinColumn(name = "researcher"), inverseJoinColumns = @JoinColumn(name = "department"))
 	private List<Department> departments;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "groupsMembers", schema = "reman", joinColumns = @JoinColumn(name = "researcher"), inverseJoinColumns = @JoinColumn(name = "group"))
 	private List<Group> groups;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "projectsMembers", schema = "reman", joinColumns = @JoinColumn(name = "researcher"), inverseJoinColumns = @JoinColumn(name = "project"))
 	private List<Project> projects;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "publicationAuthors", schema = "reman", joinColumns = @JoinColumn(name = "researcher"), inverseJoinColumns = @JoinColumn(name = "publication"))
 	private List<Publication> publications;
 	private List<ResearchLine> researchLines;
 
