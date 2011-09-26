@@ -1,10 +1,11 @@
-package br.gumn.persistence;
+package br.gumn.persistence.dao;
 
+import java.util.ArrayList;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-
+import br.gumn.bean.Department;
 import br.gumn.bean.University;
 
 public class UniversityDAO {
@@ -23,8 +24,16 @@ public class UniversityDAO {
 	public static void main(String[] args)
 	{
 		University u = new University();
-		u.setAcronym("UPE");
-		u.setName("Universidade de Pernambuco");
+		u.setAcronym("UFPE");
+		u.setName("Universidade Federal de Pernambuco");
+		
+		Department d = new Department();
+		d.setAcronym("CIn");
+		d.setName("Centro de Informática");
+		d.setUniversity(u);
+		
+		u.setDepartments(new ArrayList<Department>());
+		u.getDepartments().add(d);
 		
 		UniversityDAO ud = new UniversityDAO();
 		ud.insertOrUpdate(u);

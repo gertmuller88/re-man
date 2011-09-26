@@ -1,15 +1,38 @@
 package br.gumn.bean;
 
 import java.util.List;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "group", schema = "reman")
 public class Group {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
 	private String description;
+	@ElementCollection(targetClass=java.lang.String.class)
 	private List<String> activities;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "departmentsGroups", schema = "reman", joinColumns = @JoinColumn(name = "group"), inverseJoinColumns = @JoinColumn(name = "department"))
 	private List<Department> departments;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "groupsPublications", schema = "reman", joinColumns = @JoinColumn(name = "group"), inverseJoinColumns = @JoinColumn(name = "publication"))
 	private List<Publication> publications;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "groupsMembers", schema = "reman", joinColumns = @JoinColumn(name = "group"), inverseJoinColumns = @JoinColumn(name = "researcher"))
 	private List<Researcher> members;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "groupsResearchLines", schema = "reman", joinColumns = @JoinColumn(name = "group"), inverseJoinColumns = @JoinColumn(name = "researchLine"))
 	private List<ResearchLine> researchLines;
 
 	public int getId() {

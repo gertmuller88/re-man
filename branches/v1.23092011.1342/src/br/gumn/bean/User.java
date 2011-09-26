@@ -1,11 +1,25 @@
 package br.gumn.bean;
 
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import br.gumn.bean.enumeration.UserLevel;
 
+@Entity
+@Table(name="user", schema="rema")
 public class User {
+	@Id
 	private String login;
 	private String password;
+	@Enumerated
 	private UserLevel userLevel;
+	@OneToOne(mappedBy="user")
+	@Cascade(CascadeType.ALL)
+	private Researcher researcher;
 
 	public String getLogin() {
 		return login;
@@ -29,5 +43,13 @@ public class User {
 
 	public void setUserLevel(UserLevel userLevel) {
 		this.userLevel = userLevel;
+	}
+
+	public Researcher getResearcher() {
+		return researcher;
+	}
+
+	public void setResearcher(Researcher researcher) {
+		this.researcher = researcher;
 	}
 }
