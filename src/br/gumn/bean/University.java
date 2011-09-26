@@ -1,6 +1,16 @@
-package br.gumn.beans;
+package br.gumn.bean;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "university", schema = "reman")
 public class University {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String acronym;
 	private String name;

@@ -1,4 +1,4 @@
-package br.gumn.beans.enums;
+package br.gumn.bean.enumeration;
 
 public enum UserLevel {
 	Administrator("Administrator"), User("User");

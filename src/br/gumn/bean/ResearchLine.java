@@ -1,4 +1,4 @@
-package br.gumn.beans;
+package br.gumn.bean;
 
 public class ResearchLine {
 	private int id;

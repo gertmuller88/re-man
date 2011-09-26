@@ -1,6 +1,6 @@
-package br.gumn.beans;
+package br.gumn.bean;
 
-import br.gumn.beans.enums.UserLevel;
+import br.gumn.bean.enumeration.UserLevel;
 
 public class User {
 	private String login;

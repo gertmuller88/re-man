@@ -1,4 +1,4 @@
-package br.gumn.beans;
+package br.gumn.bean;
 
 import java.io.File;
 import java.util.List;
