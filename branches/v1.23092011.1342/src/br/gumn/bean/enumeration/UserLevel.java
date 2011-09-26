@@ -11,7 +11,7 @@ public enum UserLevel {
 		this.id = id;
 		this.level = level;
 	}
-	
+
 	public int levelID() {
 		return this.id;
 	}

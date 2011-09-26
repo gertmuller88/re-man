@@ -18,7 +18,7 @@ public enum PublicationType {
 		this.id = id;
 		this.type = type;
 	}
-	
+
 	public int typeID() {
 		return this.id;
 	}

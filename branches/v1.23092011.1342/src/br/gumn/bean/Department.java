@@ -30,6 +30,12 @@ public class Department {
 	@Cascade(CascadeType.ALL)
 	private University university;
 	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "departmentsGroups", schema = "reman", joinColumns = @JoinColumn(name = "department"), inverseJoinColumns = @JoinColumn(name = "group"))
+	private List<Group> groups;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "departmentsProjects", schema = "reman", joinColumns = @JoinColumn(name = "department"), inverseJoinColumns = @JoinColumn(name = "project"))
+	private List<Project> projects;
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "departmentsMembers", schema = "reman", joinColumns = @JoinColumn(name = "department"), inverseJoinColumns = @JoinColumn(name = "researcher"))
 	private List<Researcher> members;
 
@@ -63,6 +69,22 @@ public class Department {
 
 	public void setUniversity(University university) {
 		this.university = university;
+	}
+
+	public List<Group> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(List<Group> groups) {
+		this.groups = groups;
+	}
+
+	public List<Project> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
 	}
 
 	public List<Researcher> getMembers() {
