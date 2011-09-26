@@ -1,7 +1,8 @@
-package br.gumn.beans;
+package br.gumn.bean;
 
 import java.util.List;
-import br.gumn.beans.enums.Degree;
+
+import br.gumn.bean.enumeration.Degree;
 
 public class Researcher {
 	private String cpf;

@@ -1,9 +1,10 @@
-package br.gumn.beans;
+package br.gumn.bean;
 
 import java.io.File;
 import java.util.Date;
 import java.util.List;
-import br.gumn.beans.enums.PublicationType;
+
+import br.gumn.bean.enumeration.PublicationType;
 
 public class Publication {
 	private int id;

@@ -1,4 +1,4 @@
-package br.gumn.beans.enums;
+package br.gumn.bean.enumeration;
 
 public enum ResearcherType {
 	Professor("Professor"), Advisor("Advisor"), Coordinator("Coordinator"), Student(
