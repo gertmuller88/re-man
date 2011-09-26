@@ -1,7 +1,6 @@
 package br.gumn.bean;
 
 import java.util.List;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,11 +19,13 @@ public class Group {
 	private int id;
 	private String name;
 	private String description;
-	@ElementCollection(targetClass=java.lang.String.class)
-	private List<String> activities;
+	private String activities;
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "departmentsGroups", schema = "reman", joinColumns = @JoinColumn(name = "group"), inverseJoinColumns = @JoinColumn(name = "department"))
 	private List<Department> departments;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "groupsProjects", schema = "reman", joinColumns = @JoinColumn(name = "group"), inverseJoinColumns = @JoinColumn(name = "project"))
+	private List<Project> projects;
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "groupsPublications", schema = "reman", joinColumns = @JoinColumn(name = "group"), inverseJoinColumns = @JoinColumn(name = "publication"))
 	private List<Publication> publications;
@@ -59,11 +60,11 @@ public class Group {
 		this.description = description;
 	}
 
-	public List<String> getActivities() {
+	public String getActivities() {
 		return activities;
 	}
 
-	public void setActivities(List<String> activities) {
+	public void setActivities(String activities) {
 		this.activities = activities;
 	}
 
@@ -73,6 +74,14 @@ public class Group {
 
 	public void setDepartments(List<Department> departments) {
 		this.departments = departments;
+	}
+
+	public List<Project> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
 	}
 
 	public List<Publication> getPublications() {

@@ -41,6 +41,8 @@ public class Researcher {
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "publicationAuthors", schema = "reman", joinColumns = @JoinColumn(name = "researcher"), inverseJoinColumns = @JoinColumn(name = "publication"))
 	private List<Publication> publications;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "researchersResearchLines", schema = "reman", joinColumns = @JoinColumn(name = "researcher"), inverseJoinColumns = @JoinColumn(name = "researchLine"))
 	private List<ResearchLine> researchLines;
 
 	public String getCpf() {
