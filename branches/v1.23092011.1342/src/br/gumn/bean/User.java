@@ -10,7 +10,7 @@ import org.hibernate.annotations.CascadeType;
 import br.gumn.bean.enumeration.UserLevel;
 
 @Entity
-@Table(name="user", schema="rema")
+@Table(name="user", schema="reman")
 public class User {
 	@Id
 	private String login;

@@ -25,8 +25,8 @@ public class ResearchLine {
 	private String objectives;
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "groupsResearchLines", schema = "reman", joinColumns = @JoinColumn(name = "researchLine"), inverseJoinColumns = @JoinColumn(name = "group"))
-	private List<Group> groups;
+	@JoinTable(name = "teamsResearchLines", schema = "reman", joinColumns = @JoinColumn(name = "researchLine"), inverseJoinColumns = @JoinColumn(name = "teams"))
+	private List<Team> teams;
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "projectsResearchLines", schema = "reman", joinColumns = @JoinColumn(name = "researchLine"), inverseJoinColumns = @JoinColumn(name = "project"))
@@ -72,12 +72,12 @@ public class ResearchLine {
 		this.objectives = objectives;
 	}
 
-	public List<Group> getGroups() {
-		return groups;
+	public List<Team> getTeams() {
+		return teams;
 	}
 
-	public void setGroups(List<Group> groups) {
-		this.groups = groups;
+	public void setTeams(List<Team> teams) {
+		this.teams = teams;
 	}
 
 	public List<Project> getProjects() {

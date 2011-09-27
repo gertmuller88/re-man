@@ -38,8 +38,8 @@ public class Publication {
 	private PublicationType type;
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "groupsPublications", schema = "reman", joinColumns = @JoinColumn(name = "publication"), inverseJoinColumns = @JoinColumn(name = "group"))
-	private List<Group> group;
+	@JoinTable(name = "teamsPublications", schema = "reman", joinColumns = @JoinColumn(name = "publication"), inverseJoinColumns = @JoinColumn(name = "team"))
+	private List<Team> teams;
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "projectsPublications", schema = "reman", joinColumns = @JoinColumn(name = "publication"), inverseJoinColumns = @JoinColumn(name = "project"))
@@ -141,12 +141,12 @@ public class Publication {
 		this.type = type;
 	}
 
-	public List<Group> getGroup() {
-		return group;
+	public List<Team> getTeams() {
+		return teams;
 	}
 
-	public void setGroup(List<Group> group) {
-		this.group = group;
+	public void setTeams(List<Team> teams) {
+		this.teams = teams;
 	}
 
 	public List<Project> getProjects() {

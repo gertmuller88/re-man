@@ -39,15 +39,15 @@ public class Researcher {
 	private List<Department> departments;
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "groupsMembers", schema = "reman", joinColumns = @JoinColumn(name = "researcher"), inverseJoinColumns = @JoinColumn(name = "group"))
-	private List<Group> groups;
+	@JoinTable(name = "teamsMembers", schema = "reman", joinColumns = @JoinColumn(name = "researcher"), inverseJoinColumns = @JoinColumn(name = "team"))
+	private List<Team> teams;
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "projectsMembers", schema = "reman", joinColumns = @JoinColumn(name = "researcher"), inverseJoinColumns = @JoinColumn(name = "project"))
 	private List<Project> projects;
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "publicationAuthors", schema = "reman", joinColumns = @JoinColumn(name = "researcher"), inverseJoinColumns = @JoinColumn(name = "publication"))
+	@JoinTable(name = "publicationsAuthors", schema = "reman", joinColumns = @JoinColumn(name = "researcher"), inverseJoinColumns = @JoinColumn(name = "publication"))
 	private List<Publication> publications;
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
@@ -142,12 +142,12 @@ public class Researcher {
 		this.departments = departments;
 	}
 
-	public List<Group> getGroups() {
-		return groups;
+	public List<Team> getTeams() {
+		return teams;
 	}
 
-	public void setGroups(List<Group> groups) {
-		this.groups = groups;
+	public void setTeams(List<Team> teams) {
+		this.teams = teams;
 	}
 
 	public List<Project> getProjects() {
