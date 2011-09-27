@@ -12,11 +12,11 @@
   <property name="hibernate.connection.pool_size">10</property>
   <property name="hibernate.hbm2ddl.auto">update</property>
   <mapping class="br.gumn.bean.Department"/>
-  <mapping class="br.gumn.bean.Group"/>
   <mapping class="br.gumn.bean.Project"/>
   <mapping class="br.gumn.bean.Publication"/>
   <mapping class="br.gumn.bean.Researcher"/>
   <mapping class="br.gumn.bean.ResearchLine"/>
+  <mapping class="br.gumn.bean.Team"/>
   <mapping class="br.gumn.bean.University"/>
   <mapping class="br.gumn.bean.User"/>
  </session-factory>

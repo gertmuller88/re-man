@@ -31,8 +31,8 @@ public class Project {
 	private List<Department> departments;
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "groupsProjects", schema = "reman", joinColumns = @JoinColumn(name = "project"), inverseJoinColumns = @JoinColumn(name = "group"))
-	private List<Group> groups;
+	@JoinTable(name = "teamsProjects", schema = "reman", joinColumns = @JoinColumn(name = "project"), inverseJoinColumns = @JoinColumn(name = "team"))
+	private List<Team> teams;
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "projectsPublications", schema = "reman", joinColumns = @JoinColumn(name = "project"), inverseJoinColumns = @JoinColumn(name = "publication"))
@@ -94,12 +94,12 @@ public class Project {
 		this.departments = departments;
 	}
 
-	public List<Group> getGroups() {
-		return groups;
+	public List<Team> getTeams() {
+		return teams;
 	}
 
-	public void setGroups(List<Group> groups) {
-		this.groups = groups;
+	public void setTeams(List<Team> team) {
+		this.teams = team;
 	}
 
 	public List<Publication> getPublications() {
