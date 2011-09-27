@@ -2,7 +2,6 @@ package br.gumn.bean;
 
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +14,8 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name = "department", schema = "reman")
@@ -24,18 +25,21 @@ public class Department {
 	private int id;
 	private String acronym;
 	private String name;
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "idUniversity", insertable = true, updatable = true)
 	@Fetch(FetchMode.JOIN)
 	@Cascade(CascadeType.ALL)
 	private University university;
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "departmentsGroups", schema = "reman", joinColumns = @JoinColumn(name = "department"), inverseJoinColumns = @JoinColumn(name = "group"))
 	private List<Group> groups;
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "departmentsProjects", schema = "reman", joinColumns = @JoinColumn(name = "department"), inverseJoinColumns = @JoinColumn(name = "project"))
 	private List<Project> projects;
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "departmentsMembers", schema = "reman", joinColumns = @JoinColumn(name = "department"), inverseJoinColumns = @JoinColumn(name = "researcher"))
 	private List<Researcher> members;
 
