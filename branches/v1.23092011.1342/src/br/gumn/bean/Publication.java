@@ -3,9 +3,9 @@ package br.gumn.bean;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import br.gumn.bean.enumeration.PublicationType;
 
 @Entity
@@ -32,16 +36,20 @@ public class Publication {
 	private File bibtex;
 	@Enumerated
 	private PublicationType type;
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "groupsPublications", schema = "reman", joinColumns = @JoinColumn(name = "publication"), inverseJoinColumns = @JoinColumn(name = "group"))
 	private List<Group> group;
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "projectsPublications", schema = "reman", joinColumns = @JoinColumn(name = "publication"), inverseJoinColumns = @JoinColumn(name = "project"))
 	private List<Project> projects;
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "publicationsAuthors", schema = "reman", joinColumns = @JoinColumn(name = "publication"), inverseJoinColumns = @JoinColumn(name = "researcher"))
 	private List<Researcher> authors;
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "publicationsResearchLines", schema = "reman", joinColumns = @JoinColumn(name = "publication"), inverseJoinColumns = @JoinColumn(name = "researchLine"))
 	private List<ResearchLine> researchLines;
 

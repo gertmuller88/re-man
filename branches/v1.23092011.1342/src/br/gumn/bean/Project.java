@@ -2,8 +2,8 @@ package br.gumn.bean;
 
 import java.io.File;
 import java.util.List;
+
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name = "project", schema = "reman")
@@ -22,19 +25,24 @@ public class Project {
 	private String description;
 	private String objectives;
 	private File document;
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "departmentsProjects", schema = "reman", joinColumns = @JoinColumn(name = "project"), inverseJoinColumns = @JoinColumn(name = "department"))
 	private List<Department> departments;
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "groupsProjects", schema = "reman", joinColumns = @JoinColumn(name = "project"), inverseJoinColumns = @JoinColumn(name = "group"))
 	private List<Group> groups;
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "projectsPublications", schema = "reman", joinColumns = @JoinColumn(name = "project"), inverseJoinColumns = @JoinColumn(name = "publication"))
 	private List<Publication> publications;
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "projectsMembers", schema = "reman", joinColumns = @JoinColumn(name = "project"), inverseJoinColumns = @JoinColumn(name = "researcher"))
 	private List<Researcher> members;
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "projectsResearchLines", schema = "reman", joinColumns = @JoinColumn(name = "project"), inverseJoinColumns = @JoinColumn(name = "researchLine"))
 	private List<ResearchLine> researchLines;
 
