@@ -15,7 +15,7 @@ public enum Degree {
 		this.degree = degree;
 	}
 
-	public int degreeID() {
+	public int degreeId() {
 		return this.id;
 	}
 
