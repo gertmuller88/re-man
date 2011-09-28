@@ -15,7 +15,7 @@ public enum ResearcherType {
 		this.type = type;
 	}
 
-	public int typeID() {
+	public int typeId() {
 		return this.id;
 	}
 
