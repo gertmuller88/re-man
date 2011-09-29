@@ -2,7 +2,9 @@ package br.gumn.bean;
 
 import java.io.File;
 import java.util.List;
-
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,40 +13,52 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
-@Table(name = "project", schema = "reman")
+@Table(name = "Project", schema = "reman")
 public class Project {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private String title;
+
 	private String description;
-	private String objectives;
-	private File document;
+
+	private String name;
+
+	private File plan;
+
+	@ElementCollection
+	@CollectionTable(name = "Project_Objectives", joinColumns = @JoinColumn(name = "id_Project"))
+	@Column(name = "Objective")
+	private List<String> objectives;
+
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "departmentsProjects", schema = "reman", joinColumns = @JoinColumn(name = "project"), inverseJoinColumns = @JoinColumn(name = "department"))
+	@JoinTable(name = "Department_Project", schema = "reman", joinColumns = @JoinColumn(name = "id_Project"), inverseJoinColumns = @JoinColumn(name = "id_Department"))
 	private List<Department> departments;
+
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "teamsProjects", schema = "reman", joinColumns = @JoinColumn(name = "project"), inverseJoinColumns = @JoinColumn(name = "team"))
-	private List<Team> teams;
-	@ManyToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "projectsPublications", schema = "reman", joinColumns = @JoinColumn(name = "project"), inverseJoinColumns = @JoinColumn(name = "publication"))
+	@JoinTable(name = "Project_Publication", schema = "reman", joinColumns = @JoinColumn(name = "id_Project"), inverseJoinColumns = @JoinColumn(name = "id_Publication"))
 	private List<Publication> publications;
+
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "projectsMembers", schema = "reman", joinColumns = @JoinColumn(name = "project"), inverseJoinColumns = @JoinColumn(name = "researcher"))
+	@JoinTable(name = "Project_Researcher", schema = "reman", joinColumns = @JoinColumn(name = "id_Project"), inverseJoinColumns = @JoinColumn(name = "id_Researcher"))
 	private List<Researcher> members;
+
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "projectsResearchLines", schema = "reman", joinColumns = @JoinColumn(name = "project"), inverseJoinColumns = @JoinColumn(name = "researchLine"))
+	@JoinTable(name = "Project_ResearchLine", schema = "reman", joinColumns = @JoinColumn(name = "id_Project"), inverseJoinColumns = @JoinColumn(name = "id_ResearchLine"))
 	private List<ResearchLine> researchLines;
+
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinTable(name = "Project_Team", schema = "reman", joinColumns = @JoinColumn(name = "id_Project"), inverseJoinColumns = @JoinColumn(name = "id_Team"))
+	private List<Team> teams;
 
 	public int getId() {
 		return id;
@@ -52,14 +66,6 @@ public class Project {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 	public String getDescription() {
@@ -70,20 +76,28 @@ public class Project {
 		this.description = description;
 	}
 
-	public String getObjectives() {
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public File getPlan() {
+		return plan;
+	}
+
+	public void setPlan(File plan) {
+		this.plan = plan;
+	}
+
+	public List<String> getObjectives() {
 		return objectives;
 	}
 
-	public void setObjectives(String objectives) {
+	public void setObjectives(List<String> objectives) {
 		this.objectives = objectives;
-	}
-
-	public File getDocument() {
-		return document;
-	}
-
-	public void setDocument(File document) {
-		this.document = document;
 	}
 
 	public List<Department> getDepartments() {
@@ -92,14 +106,6 @@ public class Project {
 
 	public void setDepartments(List<Department> departments) {
 		this.departments = departments;
-	}
-
-	public List<Team> getTeams() {
-		return teams;
-	}
-
-	public void setTeams(List<Team> team) {
-		this.teams = team;
 	}
 
 	public List<Publication> getPublications() {
@@ -124,5 +130,13 @@ public class Project {
 
 	public void setResearchLines(List<ResearchLine> researchLines) {
 		this.researchLines = researchLines;
+	}
+
+	public List<Team> getTeams() {
+		return teams;
+	}
+
+	public void setTeams(List<Team> teams) {
+		this.teams = teams;
 	}
 }
