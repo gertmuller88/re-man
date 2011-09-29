@@ -87,6 +87,10 @@ public class Researcher {
 	@Cascade(CascadeType.ALL)
 	private List<Title> titles;
 
+	@OneToMany(mappedBy = "advisor", fetch = FetchType.EAGER)
+	@Cascade(CascadeType.ALL)
+	private List<Title> supervisionedTitles;
+
 	@OneToOne
 	@JoinColumn(name = "id_User", insertable = true, updatable = true)
 	@Fetch(FetchMode.JOIN)
@@ -235,6 +239,14 @@ public class Researcher {
 
 	public void setTitles(List<Title> titles) {
 		this.titles = titles;
+	}
+
+	public List<Title> getSupervisionedTitles() {
+		return supervisionedTitles;
+	}
+
+	public void setSupervisionedTitles(List<Title> supervisionedTitles) {
+		this.supervisionedTitles = supervisionedTitles;
 	}
 
 	public User getUser() {
