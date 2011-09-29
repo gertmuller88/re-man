@@ -50,7 +50,7 @@ public class Researcher {
 	@Cascade(CascadeType.ALL)
 	private Address address;
 
-	@OneToMany(mappedBy="researcher", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "researcher", fetch = FetchType.EAGER)
 	@Cascade(CascadeType.ALL)
 	private List<Association> associations;
 
@@ -59,7 +59,7 @@ public class Researcher {
 	@JoinTable(name = "Department_Researcher", schema = "reman", joinColumns = @JoinColumn(name = "id_Researcher"), inverseJoinColumns = @JoinColumn(name = "id_Department"))
 	private List<Department> departments;
 
-	@OneToMany(mappedBy="researcher", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "researcher", fetch = FetchType.EAGER)
 	@Cascade(CascadeType.ALL)
 	private List<Link> links;
 
@@ -83,7 +83,7 @@ public class Researcher {
 	@JoinTable(name = "Researcher_Team", schema = "reman", joinColumns = @JoinColumn(name = "id_Researcher"), inverseJoinColumns = @JoinColumn(name = "id_Team"))
 	private List<Team> teams;
 
-	@OneToMany(mappedBy="researcher", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "researcher", fetch = FetchType.EAGER)
 	@Cascade(CascadeType.ALL)
 	private List<Title> titles;
 
