@@ -1,8 +1,7 @@
 package br.gumn.bean.enumeration;
 
 public enum UserLevel {
-	Administrator(1, "Administrator"),
-	User(2, "User");
+	Administrator(1, "Administrator"), User(2, "User");
 
 	private final int id;
 	private final String level;
