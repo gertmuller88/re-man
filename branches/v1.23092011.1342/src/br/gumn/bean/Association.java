@@ -29,7 +29,7 @@ public class Association {
 	@JoinColumn(name = "id_Institution", insertable = true, updatable = true)
 	@Fetch(FetchMode.JOIN)
 	@Cascade(CascadeType.ALL)
-	private String institution;
+	private Institution institution;
 
 	@ManyToOne
 	@JoinColumn(name = "id_Researcher", insertable = true, updatable = true)
@@ -61,11 +61,11 @@ public class Association {
 		this.number = number;
 	}
 
-	public String getInstitution() {
+	public Institution getInstitution() {
 		return institution;
 	}
 
-	public void setInstitution(String institution) {
+	public void setInstitution(Institution institution) {
 		this.institution = institution;
 	}
 

@@ -2,7 +2,6 @@ package br.gumn.bean;
 
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +22,7 @@ public class University {
 
 	private String name;
 
-	@OneToMany(mappedBy = "university", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "university")
 	@Cascade(CascadeType.ALL)
 	private List<Department> departments;
 
