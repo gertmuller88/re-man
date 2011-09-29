@@ -1,7 +1,6 @@
 package br.gumn.bean;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,11 +27,11 @@ public class Link {
 
 	private String url;
 
-	@OneToOne(mappedBy = "site", fetch = FetchType.EAGER)
+	@OneToOne(mappedBy = "site")
 	@Cascade(CascadeType.ALL)
 	private Department department;
 
-	@OneToOne(mappedBy = "doi", fetch = FetchType.EAGER)
+	@OneToOne(mappedBy = "doi")
 	@Cascade(CascadeType.ALL)
 	private Publication publication;
 

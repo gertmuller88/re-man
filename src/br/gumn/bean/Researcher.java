@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -50,7 +49,7 @@ public class Researcher {
 	@Cascade(CascadeType.ALL)
 	private Address address;
 
-	@OneToMany(mappedBy = "researcher", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "researcher")
 	@Cascade(CascadeType.ALL)
 	private List<Association> associations;
 
@@ -59,7 +58,7 @@ public class Researcher {
 	@JoinTable(name = "Department_Researcher", schema = "reman", joinColumns = @JoinColumn(name = "id_Researcher"), inverseJoinColumns = @JoinColumn(name = "id_Department"))
 	private List<Department> departments;
 
-	@OneToMany(mappedBy = "researcher", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "researcher")
 	@Cascade(CascadeType.ALL)
 	private List<Link> links;
 
@@ -83,11 +82,11 @@ public class Researcher {
 	@JoinTable(name = "Researcher_Team", schema = "reman", joinColumns = @JoinColumn(name = "id_Researcher"), inverseJoinColumns = @JoinColumn(name = "id_Team"))
 	private List<Team> teams;
 
-	@OneToMany(mappedBy = "researcher", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "researcher")
 	@Cascade(CascadeType.ALL)
 	private List<Title> titles;
 
-	@OneToMany(mappedBy = "advisor", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "advisor")
 	@Cascade(CascadeType.ALL)
 	private List<Title> supervisionedTitles;
 
