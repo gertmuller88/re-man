@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -18,30 +19,54 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
-@Table(name = "department", schema = "reman")
+@Table(name = "Department", schema = "reman")
 public class Department {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+
 	private String acronym;
+
 	private String name;
+
+	@OneToOne
+	@JoinColumn(name = "id_Address", insertable = true, updatable = true)
+	@Fetch(FetchMode.JOIN)
+	@Cascade(CascadeType.ALL)
+	private Address address;
+
+	@OneToOne
+	@JoinColumn(name = "id_Link", insertable = true, updatable = true)
+	@Fetch(FetchMode.JOIN)
+	@Cascade(CascadeType.ALL)
+	private Link site;
+
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinTable(name = "Department_Project", schema = "reman", joinColumns = @JoinColumn(name = "id_Department"), inverseJoinColumns = @JoinColumn(name = "id_Project"))
+	private List<Project> projects;
+
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinTable(name = "Department_Publication", schema = "reman", joinColumns = @JoinColumn(name = "id_Department"), inverseJoinColumns = @JoinColumn(name = "id_Publication"))
+	private List<Publication> publications;
+
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinTable(name = "Department_Researcher", schema = "reman", joinColumns = @JoinColumn(name = "id_Department"), inverseJoinColumns = @JoinColumn(name = "id_Researcher"))
+	private List<Researcher> members;
+
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinTable(name = "Department_Team", schema = "reman", joinColumns = @JoinColumn(name = "id_Department"), inverseJoinColumns = @JoinColumn(name = "id_Team"))
+	private List<Team> teams;
+
 	@ManyToOne
-	@JoinColumn(name = "idUniversity", insertable = true, updatable = true)
+	@JoinColumn(name = "id_University", insertable = true, updatable = true)
 	@Fetch(FetchMode.JOIN)
 	@Cascade(CascadeType.ALL)
 	private University university;
-	@ManyToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "departmentsTeams", schema = "reman", joinColumns = @JoinColumn(name = "department"), inverseJoinColumns = @JoinColumn(name = "team"))
-	private List<Team> teams;
-	@ManyToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "departmentsProjects", schema = "reman", joinColumns = @JoinColumn(name = "department"), inverseJoinColumns = @JoinColumn(name = "project"))
-	private List<Project> projects;
-	@ManyToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "departmentsMembers", schema = "reman", joinColumns = @JoinColumn(name = "department"), inverseJoinColumns = @JoinColumn(name = "researcher"))
-	private List<Researcher> members;
 
 	public int getId() {
 		return id;
@@ -67,20 +92,20 @@ public class Department {
 		this.name = name;
 	}
 
-	public University getUniversity() {
-		return university;
+	public Address getAddress() {
+		return address;
 	}
 
-	public void setUniversity(University university) {
-		this.university = university;
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
-	public List<Team> getTeams() {
-		return teams;
+	public Link getSite() {
+		return site;
 	}
 
-	public void setTeams(List<Team> teams) {
-		this.teams = teams;
+	public void setSite(Link site) {
+		this.site = site;
 	}
 
 	public List<Project> getProjects() {
@@ -91,11 +116,35 @@ public class Department {
 		this.projects = projects;
 	}
 
+	public List<Publication> getPublications() {
+		return publications;
+	}
+
+	public void setPublications(List<Publication> publications) {
+		this.publications = publications;
+	}
+
 	public List<Researcher> getMembers() {
 		return members;
 	}
 
 	public void setMembers(List<Researcher> members) {
 		this.members = members;
+	}
+
+	public List<Team> getTeams() {
+		return teams;
+	}
+
+	public void setTeams(List<Team> teams) {
+		this.teams = teams;
+	}
+
+	public University getUniversity() {
+		return university;
+	}
+
+	public void setUniversity(University university) {
+		this.university = university;
 	}
 }
