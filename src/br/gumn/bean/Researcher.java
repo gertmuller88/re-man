@@ -1,58 +1,97 @@
 package br.gumn.bean;
 
+import java.io.File;
 import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-
 import br.gumn.bean.enumeration.Degree;
 
 @Entity
-@Table(name="researcher", schema="reman")
+@Table(name = "Researcher", schema = "reman")
 public class Researcher {
+
 	@Id
 	private String cpf;
-	private String name;
-	private String rg;
-	private String occupation;
-	private String address;
+
 	private String bankData;
-	private String lattes;
+
+	private String brief;
+
 	private String email;
+
+	private File image;
+
+	private String name;
+
+	private String occupation;
+
+	private String rg;
+
 	@Enumerated
 	private Degree degree;
+
 	@OneToOne
-	@JoinColumn(name="user")
-	private User user;
+	@JoinColumn(name = "id_Address", insertable = true, updatable = true)
+	@Fetch(FetchMode.JOIN)
+	@Cascade(CascadeType.ALL)
+	private Address address;
+
+	@OneToMany(mappedBy="researcher", fetch=FetchType.EAGER)
+	@Cascade(CascadeType.ALL)
+	private List<Association> associations;
+
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "departmentsMembers", schema = "reman", joinColumns = @JoinColumn(name = "researcher"), inverseJoinColumns = @JoinColumn(name = "department"))
+	@JoinTable(name = "Department_Researcher", schema = "reman", joinColumns = @JoinColumn(name = "id_Researcher"), inverseJoinColumns = @JoinColumn(name = "id_Department"))
 	private List<Department> departments;
+
+	@OneToMany(mappedBy="researcher", fetch=FetchType.EAGER)
+	@Cascade(CascadeType.ALL)
+	private List<Link> links;
+
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "teamsMembers", schema = "reman", joinColumns = @JoinColumn(name = "researcher"), inverseJoinColumns = @JoinColumn(name = "team"))
-	private List<Team> teams;
-	@ManyToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "projectsMembers", schema = "reman", joinColumns = @JoinColumn(name = "researcher"), inverseJoinColumns = @JoinColumn(name = "project"))
+	@JoinTable(name = "Project_Researcher", schema = "reman", joinColumns = @JoinColumn(name = "id_Researcher"), inverseJoinColumns = @JoinColumn(name = "id_Project"))
 	private List<Project> projects;
+
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "publicationsAuthors", schema = "reman", joinColumns = @JoinColumn(name = "researcher"), inverseJoinColumns = @JoinColumn(name = "publication"))
+	@JoinTable(name = "Publication_Researcher", schema = "reman", joinColumns = @JoinColumn(name = "id_Researcher"), inverseJoinColumns = @JoinColumn(name = "id_Publication"))
 	private List<Publication> publications;
+
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "researchersResearchLines", schema = "reman", joinColumns = @JoinColumn(name = "researcher"), inverseJoinColumns = @JoinColumn(name = "researchLine"))
+	@JoinTable(name = "Researcher_ResearchLine", schema = "reman", joinColumns = @JoinColumn(name = "id_Researcher"), inverseJoinColumns = @JoinColumn(name = "id_ResearchLine"))
 	private List<ResearchLine> researchLines;
+
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinTable(name = "Researcher_Team", schema = "reman", joinColumns = @JoinColumn(name = "id_Researcher"), inverseJoinColumns = @JoinColumn(name = "id_Team"))
+	private List<Team> teams;
+
+	@OneToMany(mappedBy="researcher", fetch=FetchType.EAGER)
+	@Cascade(CascadeType.ALL)
+	private List<Title> titles;
+
+	@OneToOne
+	@JoinColumn(name = "id_User", insertable = true, updatable = true)
+	@Fetch(FetchMode.JOIN)
+	@Cascade(CascadeType.ALL)
+	private User user;
 
 	public String getCpf() {
 		return cpf;
@@ -60,38 +99,6 @@ public class Researcher {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getRg() {
-		return rg;
-	}
-
-	public void setRg(String rg) {
-		this.rg = rg;
-	}
-
-	public String getOccupation() {
-		return occupation;
-	}
-
-	public void setOccupation(String occupation) {
-		this.occupation = occupation;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
 	}
 
 	public String getBankData() {
@@ -102,12 +109,12 @@ public class Researcher {
 		this.bankData = bankData;
 	}
 
-	public String getLattes() {
-		return lattes;
+	public String getBrief() {
+		return brief;
 	}
 
-	public void setLattes(String lattes) {
-		this.lattes = lattes;
+	public void setBrief(String brief) {
+		this.brief = brief;
 	}
 
 	public String getEmail() {
@@ -118,6 +125,38 @@ public class Researcher {
 		this.email = email;
 	}
 
+	public File getImage() {
+		return image;
+	}
+
+	public void setImage(File image) {
+		this.image = image;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getOccupation() {
+		return occupation;
+	}
+
+	public void setOccupation(String occupation) {
+		this.occupation = occupation;
+	}
+
+	public String getRg() {
+		return rg;
+	}
+
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+
 	public Degree getDegree() {
 		return degree;
 	}
@@ -126,12 +165,20 @@ public class Researcher {
 		this.degree = degree;
 	}
 
-	public User getUser() {
-		return user;
+	public Address getAddress() {
+		return address;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public List<Association> getAssociations() {
+		return associations;
+	}
+
+	public void setAssociations(List<Association> associations) {
+		this.associations = associations;
 	}
 
 	public List<Department> getDepartments() {
@@ -142,12 +189,12 @@ public class Researcher {
 		this.departments = departments;
 	}
 
-	public List<Team> getTeams() {
-		return teams;
+	public List<Link> getLinks() {
+		return links;
 	}
 
-	public void setTeams(List<Team> teams) {
-		this.teams = teams;
+	public void setLinks(List<Link> links) {
+		this.links = links;
 	}
 
 	public List<Project> getProjects() {
@@ -172,5 +219,29 @@ public class Researcher {
 
 	public void setResearchLines(List<ResearchLine> researchLines) {
 		this.researchLines = researchLines;
+	}
+
+	public List<Team> getTeams() {
+		return teams;
+	}
+
+	public void setTeams(List<Team> teams) {
+		this.teams = teams;
+	}
+
+	public List<Title> getTitles() {
+		return titles;
+	}
+
+	public void setTitles(List<Title> titles) {
+		this.titles = titles;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }
