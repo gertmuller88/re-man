@@ -9,12 +9,13 @@ public class GenericHibernateSessionFactory {
 
 	public static Session openSession() {
 		Configuration configuration = new Configuration();
-		configuration.configure("/br/gumn/persistence/hibernate/hibernate.cfg.xml");
+		configuration
+				.configure("/br/gumn/persistence/hibernate/hibernate.cfg.xml");
 		SessionFactory sf = configuration.buildSessionFactory();
 		if (session == null) {
 			return session = sf.openSession();
 		} else {
-			if(session.isOpen())
+			if (session.isOpen())
 				return session;
 			else
 				return session = sf.openSession();
