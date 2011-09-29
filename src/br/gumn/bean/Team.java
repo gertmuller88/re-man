@@ -1,6 +1,10 @@
 package br.gumn.bean;
 
+import java.io.File;
 import java.util.List;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,33 +17,47 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
-@Table(name = "team", schema = "reman")
+@Table(name = "Team", schema = "reman")
 public class Team {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private String name;
+
 	private String description;
-	private String activities;
+
+	private String name;
+
+	private File plan;
+
+	@ElementCollection
+	@CollectionTable(name = "Team_Activities", joinColumns = @JoinColumn(name = "id_Team"))
+	@Column(name = "Activity")
+	private List<String> activities;
+
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "departmentsTeams", schema = "reman", joinColumns = @JoinColumn(name = "team"), inverseJoinColumns = @JoinColumn(name = "department"))
+	@JoinTable(name = "Department_Team", schema = "reman", joinColumns = @JoinColumn(name = "id_Team"), inverseJoinColumns = @JoinColumn(name = "id_Department"))
 	private List<Department> departments;
+
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "teamsProjects", schema = "reman", joinColumns = @JoinColumn(name = "team"), inverseJoinColumns = @JoinColumn(name = "project"))
+	@JoinTable(name = "Project_Team", schema = "reman", joinColumns = @JoinColumn(name = "id_Team"), inverseJoinColumns = @JoinColumn(name = "id_Project"))
 	private List<Project> projects;
+
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "teamsPublications", schema = "reman", joinColumns = @JoinColumn(name = "team"), inverseJoinColumns = @JoinColumn(name = "publication"))
+	@JoinTable(name = "Publication_Team", schema = "reman", joinColumns = @JoinColumn(name = "id_Team"), inverseJoinColumns = @JoinColumn(name = "id_Publication"))
 	private List<Publication> publications;
+
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "teamsMembers", schema = "reman", joinColumns = @JoinColumn(name = "team"), inverseJoinColumns = @JoinColumn(name = "researcher"))
+	@JoinTable(name = "Researcher_Team", schema = "reman", joinColumns = @JoinColumn(name = "id_Team"), inverseJoinColumns = @JoinColumn(name = "id_Researcher"))
 	private List<Researcher> members;
+
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "teamsResearchLines", schema = "reman", joinColumns = @JoinColumn(name = "team"), inverseJoinColumns = @JoinColumn(name = "researchLine"))
+	@JoinTable(name = "ResearchLine_Team", schema = "reman", joinColumns = @JoinColumn(name = "id_Team"), inverseJoinColumns = @JoinColumn(name = "id_ResearchLine"))
 	private List<ResearchLine> researchLines;
 
 	public int getId() {
@@ -50,14 +68,6 @@ public class Team {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getDescription() {
 		return description;
 	}
@@ -66,11 +76,27 @@ public class Team {
 		this.description = description;
 	}
 
-	public String getActivities() {
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public File getPlan() {
+		return plan;
+	}
+
+	public void setPlan(File plan) {
+		this.plan = plan;
+	}
+
+	public List<String> getActivities() {
 		return activities;
 	}
 
-	public void setActivities(String activities) {
+	public void setActivities(List<String> activities) {
 		this.activities = activities;
 	}
 
