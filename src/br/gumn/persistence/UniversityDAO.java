@@ -1,6 +1,5 @@
 package br.gumn.persistence;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
@@ -17,14 +16,6 @@ public class UniversityDAO extends GenericHibernateDAO<University> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<University> selectByName(String name) {
-		Session session = GenericHibernateSessionFactory.openSession();
-		return session.createCriteria(University.class)
-				.add(Restrictions.like("name", "%" + name + "%"))
-				.addOrder(Order.asc("name")).list();
-	}
-
-	@SuppressWarnings("unchecked")
 	public List<University> selectByAcronym(String acronym) {
 		Session session = GenericHibernateSessionFactory.openSession();
 		return session.createCriteria(University.class)
@@ -33,15 +24,16 @@ public class UniversityDAO extends GenericHibernateDAO<University> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<University> selectByDepartment(Department department) {
+	public List<University> selectByName(String name) {
 		Session session = GenericHibernateSessionFactory.openSession();
-		List<Department> departments = session.createCriteria(Department.class)
-				.add(Restrictions.or(Restrictions.or(Restrictions.eq("id", department.getId()), Restrictions.like("name", department.getName())), Restrictions.like("acronym", department.getAcronym())))
-				.addOrder(Order.asc("id")).list();
-		List<University> universities = new ArrayList<University>();
-		for (int i = 0; i < departments.size(); i++) {
-			universities.add(departments.get(i).getUniversity());
-		}
-		return universities;
+		return session.createCriteria(University.class)
+				.add(Restrictions.like("name", "%" + name + "%"))
+				.addOrder(Order.asc("name")).list();
+	}
+
+	public University selectByDepartment(int idDepartment) {
+		DepartmentDAO departmentDAO = new DepartmentDAO();
+		Department department = departmentDAO.selectById(idDepartment);
+		return department.getUniversity();
 	}
 }
