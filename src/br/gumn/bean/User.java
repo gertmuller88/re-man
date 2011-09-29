@@ -2,6 +2,7 @@ package br.gumn.bean;
 
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -10,14 +11,18 @@ import org.hibernate.annotations.CascadeType;
 import br.gumn.bean.enumeration.UserLevel;
 
 @Entity
-@Table(name="user", schema="reman")
+@Table(name = "User", schema = "reman")
 public class User {
+
 	@Id
 	private String login;
+
 	private String password;
+
 	@Enumerated
 	private UserLevel userLevel;
-	@OneToOne(mappedBy="user")
+
+	@OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
 	@Cascade(CascadeType.ALL)
 	private Researcher researcher;
 
