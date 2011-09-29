@@ -12,14 +12,18 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 @Entity
-@Table(name = "university", schema = "reman")
+@Table(name = "University", schema = "reman")
 public class University {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+
 	private String acronym;
+
 	private String name;
-	@OneToMany(mappedBy="university", fetch=FetchType.EAGER)
+
+	@OneToMany(mappedBy = "university", fetch = FetchType.EAGER)
 	@Cascade(CascadeType.ALL)
 	private List<Department> departments;
 
