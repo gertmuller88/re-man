@@ -1,11 +1,8 @@
 package br.gumn.bean.enumeration;
 
 public enum ResearcherType {
-	Professor(1, "Professor"),
-	Advisor(2, "Advisor"),
-	Coordinator(3, "Coordinator"),
-	Student(4, "Student"),
-	Mentee(5, "Mentee");
+	Professor(1, "Professor"), Advisor(2, "Advisor"), Coordinator(3,
+			"Coordinator"), Student(4, "Student"), Mentee(5, "Mentee");
 
 	private final int id;
 	private final String type;
