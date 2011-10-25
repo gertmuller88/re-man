@@ -8,17 +8,25 @@ public class GenericHibernateSessionFactory {
 	private static Session session;
 
 	public static Session openSession() {
-		Configuration configuration = new Configuration();
-		configuration
-				.configure("/br/gumn/persistence/hibernate/hibernate.cfg.xml");
-		SessionFactory sf = configuration.buildSessionFactory();
 		if (session == null) {
+			Configuration configuration = new Configuration();
+			configuration
+					.configure("/br/gumn/persistence/hibernate/hibernate.cfg.xml");
+			SessionFactory sf = configuration.buildSessionFactory();
+			return session = sf.openSession();
+		} else if (!session.isOpen()) {
+			Configuration configuration = new Configuration();
+			configuration
+					.configure("/br/gumn/persistence/hibernate/hibernate.cfg.xml");
+			SessionFactory sf = configuration.buildSessionFactory();
 			return session = sf.openSession();
 		} else {
-			if (session.isOpen())
-				return session;
-			else
-				return session = sf.openSession();
+			return session;
 		}
+	}
+	
+	public static boolean closeSession() {
+		session.close();
+		return true;
 	}
 }
