@@ -9,16 +9,24 @@ import br.gumn.persistence.hibernate.GenericHibernateSessionFactory;
 
 public class ProjectDAO extends GenericHibernateDAO<Project> {
 	public Project selectById(int id) {
-		return (Project) GenericHibernateSessionFactory.openSession().load(
-				Project.class, id);
+		try {
+			return (Project) GenericHibernateSessionFactory.openSession().load(
+					Project.class, id);
+		} finally {
+			GenericHibernateSessionFactory.closeSession();
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Project> selectByName(String name) {
-		return GenericHibernateSessionFactory.openSession()
-				.createCriteria(Project.class)
-				.add(Restrictions.like("name", "%" + name + "%"))
-				.addOrder(Order.asc("name")).list();
+		try {
+			return GenericHibernateSessionFactory.openSession()
+					.createCriteria(Project.class)
+					.add(Restrictions.like("name", "%" + name + "%"))
+					.addOrder(Order.asc("name")).list();
+		} finally {
+			GenericHibernateSessionFactory.closeSession();
+		}
 	}
 
 	public List<Project> selectByDepartment(int idDepartment) {
@@ -32,11 +40,11 @@ public class ProjectDAO extends GenericHibernateDAO<Project> {
 	public List<Project> selectByMember(String cpfResearcher) {
 		return new ResearcherDAO().selectByCpf(cpfResearcher).getProjects();
 	}
-	
+
 	public List<Project> selectByResearchLine(int idResearchLine) {
 		return new ResearchLineDAO().selectById(idResearchLine).getProjects();
 	}
-	
+
 	public List<Project> selectByTeam(int idTeam) {
 		return new TeamDAO().selectById(idTeam).getProjects();
 	}

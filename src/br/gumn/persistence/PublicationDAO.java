@@ -9,16 +9,24 @@ import br.gumn.persistence.hibernate.GenericHibernateSessionFactory;
 
 public class PublicationDAO extends GenericHibernateDAO<Publication> {
 	public Publication selectById(int id) {
-		return (Publication) GenericHibernateSessionFactory.openSession().load(
-				Publication.class, id);
+		try {
+			return (Publication) GenericHibernateSessionFactory.openSession()
+					.load(Publication.class, id);
+		} finally {
+			GenericHibernateSessionFactory.closeSession();
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Publication> selectByTitle(String title) {
-		return GenericHibernateSessionFactory.openSession()
-				.createCriteria(Publication.class)
-				.add(Restrictions.like("title", "%" + title + "%"))
-				.addOrder(Order.asc("title")).list();
+		try {
+			return GenericHibernateSessionFactory.openSession()
+					.createCriteria(Publication.class)
+					.add(Restrictions.like("title", "%" + title + "%"))
+					.addOrder(Order.asc("title")).list();
+		} finally {
+			GenericHibernateSessionFactory.closeSession();
+		}
 	}
 
 	public List<Publication> selectByDepartment(int idDepartment) {

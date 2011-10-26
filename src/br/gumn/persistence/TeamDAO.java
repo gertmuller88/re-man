@@ -9,16 +9,24 @@ import br.gumn.persistence.hibernate.GenericHibernateSessionFactory;
 
 public class TeamDAO extends GenericHibernateDAO<Team> {
 	public Team selectById(int id) {
-		return (Team) GenericHibernateSessionFactory.openSession().load(
-				Team.class, id);
+		try {
+			return (Team) GenericHibernateSessionFactory.openSession().load(
+					Team.class, id);
+		} finally {
+			GenericHibernateSessionFactory.closeSession();
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Team> selectByName(String name) {
-		return GenericHibernateSessionFactory.openSession()
-				.createCriteria(Team.class)
-				.add(Restrictions.like("name", "%" + name + "%"))
-				.addOrder(Order.asc("name")).list();
+		try {
+			return GenericHibernateSessionFactory.openSession()
+					.createCriteria(Team.class)
+					.add(Restrictions.like("name", "%" + name + "%"))
+					.addOrder(Order.asc("name")).list();
+		} finally {
+			GenericHibernateSessionFactory.closeSession();
+		}
 	}
 
 	public List<Team> selectByDepartment(int idDepartment) {

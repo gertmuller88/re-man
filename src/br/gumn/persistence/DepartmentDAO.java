@@ -9,24 +9,36 @@ import br.gumn.persistence.hibernate.GenericHibernateSessionFactory;
 
 public class DepartmentDAO extends GenericHibernateDAO<Department> {
 	public Department selectById(int id) {
-		return (Department) GenericHibernateSessionFactory.openSession().load(
-				Department.class, id);
+		try {
+			return (Department) GenericHibernateSessionFactory.openSession()
+					.load(Department.class, id);
+		} finally {
+			GenericHibernateSessionFactory.closeSession();
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Department> selectByAcronym(String acronym) {
-		return GenericHibernateSessionFactory.openSession()
-				.createCriteria(Department.class)
-				.add(Restrictions.like("acronym", "%" + acronym + "%"))
-				.addOrder(Order.asc("acronym")).list();
+		try {
+			return GenericHibernateSessionFactory.openSession()
+					.createCriteria(Department.class)
+					.add(Restrictions.like("acronym", "%" + acronym + "%"))
+					.addOrder(Order.asc("acronym")).list();
+		} finally {
+			GenericHibernateSessionFactory.closeSession();
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Department> selectByName(String name) {
-		return GenericHibernateSessionFactory.openSession()
-				.createCriteria(Department.class)
-				.add(Restrictions.like("name", "%" + name + "%"))
-				.addOrder(Order.asc("name")).list();
+		try {
+			return GenericHibernateSessionFactory.openSession()
+					.createCriteria(Department.class)
+					.add(Restrictions.like("name", "%" + name + "%"))
+					.addOrder(Order.asc("name")).list();
+		} finally {
+			GenericHibernateSessionFactory.closeSession();
+		}
 	}
 
 	public List<Department> selectByProject(int idProject) {
