@@ -30,7 +30,7 @@ public class ProjectDAO extends GenericHibernateDAO<Project> {
 	}
 
 	public List<Project> selectByMember(String cpfResearcher) {
-		return new ResearcherDAO().selectById(cpfResearcher).getProjects();
+		return new ResearcherDAO().selectByCpf(cpfResearcher).getProjects();
 	}
 	
 	public List<Project> selectByResearchLine(int idResearchLine) {

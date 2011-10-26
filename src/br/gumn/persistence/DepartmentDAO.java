@@ -29,19 +29,23 @@ public class DepartmentDAO extends GenericHibernateDAO<Department> {
 				.addOrder(Order.asc("name")).list();
 	}
 
-	public List<Department> selectByUniversity(int idUniversity) {
-		return new UniversityDAO().selectById(idUniversity).getDepartments();
+	public List<Department> selectByProject(int idProject) {
+		return new ProjectDAO().selectById(idProject).getDepartments();
+	}
+
+	public List<Department> selectByPublication(int idPublication) {
+		return new PublicationDAO().selectById(idPublication).getDepartments();
+	}
+
+	public List<Department> selectByMember(String cpfResearcher) {
+		return new ResearcherDAO().selectByCpf(cpfResearcher).getDepartments();
 	}
 
 	public List<Department> selectByTeam(int idTeam) {
 		return new TeamDAO().selectById(idTeam).getDepartments();
 	}
 
-	public List<Department> selectByProject(int idProject) {
-		return new ProjectDAO().selectById(idProject).getDepartments();
-	}
-
-	public List<Department> selectByResearcher(String cpfResearcher) {
-		return new ResearcherDAO().selectById(cpfResearcher).getDepartments();
+	public List<Department> selectByUniversity(int idUniversity) {
+		return new UniversityDAO().selectById(idUniversity).getDepartments();
 	}
 }
