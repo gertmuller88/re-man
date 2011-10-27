@@ -4,10 +4,10 @@ import java.util.List;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import br.gumn.bean.Department;
-import br.gumn.persistence.hibernate.GenericHibernateDAO;
-import br.gumn.persistence.hibernate.GenericHibernateSessionFactory;
+import br.gumn.persistence.util.AbstractDAO;
+import br.gumn.persistence.util.GenericHibernateSessionFactory;
 
-public class DepartmentDAO extends GenericHibernateDAO<Department> {
+public class DepartmentDAO extends AbstractDAO<Department> {
 	public Department selectById(int id) {
 		try {
 			return (Department) GenericHibernateSessionFactory.openSession()

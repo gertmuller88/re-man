@@ -1,10 +1,10 @@
 package br.gumn.persistence;
 
 import br.gumn.bean.User;
-import br.gumn.persistence.hibernate.GenericHibernateDAO;
-import br.gumn.persistence.hibernate.GenericHibernateSessionFactory;
+import br.gumn.persistence.util.AbstractDAO;
+import br.gumn.persistence.util.GenericHibernateSessionFactory;
 
-public class UserDAO extends GenericHibernateDAO<User> {
+public class UserDAO extends AbstractDAO<User> {
 	public User selectByLogin(String login) {
 		try {
 			return (User) GenericHibernateSessionFactory.openSession().load(
