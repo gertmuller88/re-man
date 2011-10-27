@@ -4,7 +4,7 @@ import org.hibernate.Session;
 
 public abstract class AbstractDAO<T> {
 	public boolean insert(T t) {
-		Session session = GenericHibernateSessionFactory.openSession();
+		Session session = HibernateSessionFactory.openSession();
 		session.beginTransaction();
 		session.save(t);
 
@@ -20,7 +20,7 @@ public abstract class AbstractDAO<T> {
 	}
 
 	public boolean update(T t) {
-		Session session = GenericHibernateSessionFactory.openSession();
+		Session session = HibernateSessionFactory.openSession();
 		session.beginTransaction();
 		session.update(t);
 
@@ -36,7 +36,7 @@ public abstract class AbstractDAO<T> {
 	}
 
 	public boolean insertOrUpdate(T t) {
-		Session session = GenericHibernateSessionFactory.openSession();
+		Session session = HibernateSessionFactory.openSession();
 		session.beginTransaction();
 		session.saveOrUpdate(t);
 
@@ -52,7 +52,7 @@ public abstract class AbstractDAO<T> {
 	}
 
 	public boolean delete(T t) {
-		Session session = GenericHibernateSessionFactory.openSession();
+		Session session = HibernateSessionFactory.openSession();
 		session.beginTransaction();
 		session.delete(t);
 
