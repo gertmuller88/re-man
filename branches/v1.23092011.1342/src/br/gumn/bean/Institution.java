@@ -7,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "Institution", schema = "reman")
@@ -23,7 +21,6 @@ public class Institution {
 	private String name;
 
 	@OneToMany(mappedBy = "institution")
-	@Cascade(CascadeType.ALL)
 	private List<Association> associations;
 
 	public int getId() {

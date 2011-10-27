@@ -1,6 +1,8 @@
 package br.gumn.bean;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -8,10 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "Link", schema = "reman")
@@ -28,17 +26,13 @@ public class Link {
 	private String url;
 
 	@OneToOne(mappedBy = "site")
-	@Cascade(CascadeType.ALL)
 	private Department department;
 
 	@OneToOne(mappedBy = "doi")
-	@Cascade(CascadeType.ALL)
 	private Publication publication;
 
-	@ManyToOne
+	@ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_Researcher", insertable = true, updatable = true)
-	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.ALL)
 	private Researcher researcher;
 
 	public int getId() {

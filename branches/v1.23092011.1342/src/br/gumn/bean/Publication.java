@@ -3,8 +3,11 @@ package br.gumn.bean;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,12 +16,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import br.gumn.bean.enumeration.PublicationType;
 
 @Entity
@@ -45,43 +42,32 @@ public class Publication {
 
 	private String title;
 
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	private PublicationType type;
 
-	@OneToOne
+	@OneToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_Address", insertable = true, updatable = true)
-	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.ALL)
 	private Address local;
 
-	@ManyToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "Department_Publication", schema = "reman", joinColumns = @JoinColumn(name = "id_Publication"), inverseJoinColumns = @JoinColumn(name = "id_Department"))
-	private List<Department> departments;
-
-	@OneToOne
+	@OneToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_Link", insertable = true, updatable = true)
-	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.ALL)
 	private Link doi;
 
-	@ManyToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "Project_Publication", schema = "reman", joinColumns = @JoinColumn(name = "id_Publication"), inverseJoinColumns = @JoinColumn(name = "id_Project"))
+	@ManyToMany(mappedBy = "publications")
+	private List<Department> departments;
+
+	@ManyToMany(mappedBy = "publications")
 	private List<Project> projects;
 
 	@ManyToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "Publication_Researcher", schema = "reman", joinColumns = @JoinColumn(name = "id_Publication"), inverseJoinColumns = @JoinColumn(name = "id_Researcher"))
 	private List<Researcher> authors;
 
 	@ManyToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "Publication_ResearchLine", schema = "reman", joinColumns = @JoinColumn(name = "id_Publication"), inverseJoinColumns = @JoinColumn(name = "id_ResearchLine"))
 	private List<ResearchLine> researchLines;
 
 	@ManyToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "Publication_Team", schema = "reman", joinColumns = @JoinColumn(name = "id_Publication"), inverseJoinColumns = @JoinColumn(name = "id_Team"))
 	private List<Team> teams;
 
@@ -173,20 +159,20 @@ public class Publication {
 		this.local = local;
 	}
 
-	public List<Department> getDepartments() {
-		return departments;
-	}
-
-	public void setDepartments(List<Department> departments) {
-		this.departments = departments;
-	}
-
 	public Link getDoi() {
 		return doi;
 	}
 
 	public void setDoi(Link doi) {
 		this.doi = doi;
+	}
+
+	public List<Department> getDepartments() {
+		return departments;
+	}
+
+	public void setDepartments(List<Department> departments) {
+		this.departments = departments;
 	}
 
 	public List<Project> getProjects() {

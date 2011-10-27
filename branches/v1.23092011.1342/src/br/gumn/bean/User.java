@@ -5,8 +5,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import br.gumn.bean.enumeration.UserLevel;
 
 @Entity
@@ -22,7 +20,6 @@ public class User {
 	private UserLevel userLevel;
 
 	@OneToOne(mappedBy = "user")
-	@Cascade(CascadeType.ALL)
 	private Researcher researcher;
 
 	public String getLogin() {
