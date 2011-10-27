@@ -5,27 +5,27 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import br.gumn.bean.ResearchLine;
 import br.gumn.persistence.util.AbstractDAO;
-import br.gumn.persistence.util.GenericHibernateSessionFactory;
+import br.gumn.persistence.util.HibernateSessionFactory;
 
 public class ResearchLineDAO extends AbstractDAO<ResearchLine> {
 	public ResearchLine selectById(int id) {
 		try {
-			return (ResearchLine) GenericHibernateSessionFactory.openSession()
-					.load(ResearchLine.class, id);
+			return (ResearchLine) HibernateSessionFactory.openSession().load(
+					ResearchLine.class, id);
 		} finally {
-			GenericHibernateSessionFactory.closeSession();
+			HibernateSessionFactory.closeSession();
 		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<ResearchLine> selectByTitle(String title) {
 		try {
-			return GenericHibernateSessionFactory.openSession()
+			return HibernateSessionFactory.openSession()
 					.createCriteria(ResearchLine.class)
 					.add(Restrictions.like("title", "%" + title + "%"))
 					.addOrder(Order.asc("title")).list();
 		} finally {
-			GenericHibernateSessionFactory.closeSession();
+			HibernateSessionFactory.closeSession();
 		}
 	}
 

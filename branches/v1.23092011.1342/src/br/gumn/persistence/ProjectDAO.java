@@ -5,27 +5,27 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import br.gumn.bean.Project;
 import br.gumn.persistence.util.AbstractDAO;
-import br.gumn.persistence.util.GenericHibernateSessionFactory;
+import br.gumn.persistence.util.HibernateSessionFactory;
 
 public class ProjectDAO extends AbstractDAO<Project> {
 	public Project selectById(int id) {
 		try {
-			return (Project) GenericHibernateSessionFactory.openSession().load(
+			return (Project) HibernateSessionFactory.openSession().load(
 					Project.class, id);
 		} finally {
-			GenericHibernateSessionFactory.closeSession();
+			HibernateSessionFactory.closeSession();
 		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Project> selectByName(String name) {
 		try {
-			return GenericHibernateSessionFactory.openSession()
+			return HibernateSessionFactory.openSession()
 					.createCriteria(Project.class)
 					.add(Restrictions.like("name", "%" + name + "%"))
 					.addOrder(Order.asc("name")).list();
 		} finally {
-			GenericHibernateSessionFactory.closeSession();
+			HibernateSessionFactory.closeSession();
 		}
 	}
 

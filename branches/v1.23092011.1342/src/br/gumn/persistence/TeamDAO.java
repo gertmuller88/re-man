@@ -5,27 +5,27 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import br.gumn.bean.Team;
 import br.gumn.persistence.util.AbstractDAO;
-import br.gumn.persistence.util.GenericHibernateSessionFactory;
+import br.gumn.persistence.util.HibernateSessionFactory;
 
 public class TeamDAO extends AbstractDAO<Team> {
 	public Team selectById(int id) {
 		try {
-			return (Team) GenericHibernateSessionFactory.openSession().load(
+			return (Team) HibernateSessionFactory.openSession().load(
 					Team.class, id);
 		} finally {
-			GenericHibernateSessionFactory.closeSession();
+			HibernateSessionFactory.closeSession();
 		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Team> selectByName(String name) {
 		try {
-			return GenericHibernateSessionFactory.openSession()
+			return HibernateSessionFactory.openSession()
 					.createCriteria(Team.class)
 					.add(Restrictions.like("name", "%" + name + "%"))
 					.addOrder(Order.asc("name")).list();
 		} finally {
-			GenericHibernateSessionFactory.closeSession();
+			HibernateSessionFactory.closeSession();
 		}
 	}
 
