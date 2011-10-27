@@ -1,69 +1,108 @@
 package br.gumn.persistence.util;
 
-import org.hibernate.Session;
+import java.lang.reflect.ParameterizedType;
+import javax.persistence.EntityExistsException;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
+import javax.persistence.TransactionRequiredException;
 
 public abstract class AbstractDAO<T> {
-	public boolean insert(T t) {
-		Session session = HibernateSessionFactory.openSession();
-		session.beginTransaction();
-		session.save(t);
+	private Class<T> persistentClass;
+
+	@SuppressWarnings("unchecked")
+	public AbstractDAO() {
+		this.persistentClass = (Class<T>) ((ParameterizedType) getClass()
+				.getGenericSuperclass()).getActualTypeArguments()[0];
+	}
+
+	public boolean persist(T t) throws EntityExistsException,
+			IllegalArgumentException, TransactionRequiredException,
+			PersistenceException {
+		EntityManager em = PersistenceFactory.createEntityManager();
 
 		try {
-			session.getTransaction().commit();
+			em.getTransaction().begin();
+			em.persist(t);
+			em.getTransaction().commit();
 			return true;
-		} catch (Exception e) {
-			session.getTransaction().rollback();
-			return false;
+		} catch (EntityExistsException e) {
+			em.getTransaction().rollback();
+			throw e;
+		} catch (IllegalArgumentException e) {
+			em.getTransaction().rollback();
+			throw e;
+		} catch (TransactionRequiredException e) {
+			em.getTransaction().rollback();
+			throw e;
+		} catch (PersistenceException e) {
+			em.getTransaction().rollback();
+			throw e;
 		} finally {
-			session.close();
+			em.close();
 		}
 	}
 
-	public boolean update(T t) {
-		Session session = HibernateSessionFactory.openSession();
-		session.beginTransaction();
-		session.update(t);
+	public boolean merge(T t) throws IllegalArgumentException,
+			TransactionRequiredException {
+		EntityManager em = PersistenceFactory.createEntityManager();
 
 		try {
-			session.getTransaction().commit();
+			em.getTransaction().begin();
+			em.merge(t);
+			em.getTransaction().commit();
 			return true;
-		} catch (Exception e) {
-			session.getTransaction().rollback();
-			return false;
+		} catch (IllegalArgumentException e) {
+			em.getTransaction().rollback();
+			throw e;
+		} catch (TransactionRequiredException e) {
+			em.getTransaction().rollback();
+			throw e;
 		} finally {
-			session.close();
+			em.close();
 		}
 	}
 
-	public boolean insertOrUpdate(T t) {
-		Session session = HibernateSessionFactory.openSession();
-		session.beginTransaction();
-		session.saveOrUpdate(t);
+	public boolean remove(T t) throws IllegalArgumentException,
+			TransactionRequiredException {
+		EntityManager em = PersistenceFactory.createEntityManager();
 
 		try {
-			session.getTransaction().commit();
+			em.getTransaction().begin();
+			em.remove(t);
+			em.getTransaction().commit();
 			return true;
-		} catch (Exception e) {
-			session.getTransaction().rollback();
-			return false;
+		} catch (IllegalArgumentException e) {
+			em.getTransaction().rollback();
+			throw e;
+		} catch (TransactionRequiredException e) {
+			em.getTransaction().rollback();
+			throw e;
 		} finally {
-			session.close();
+			em.close();
 		}
 	}
 
-	public boolean delete(T t) {
-		Session session = HibernateSessionFactory.openSession();
-		session.beginTransaction();
-		session.delete(t);
+	public T find(int pk) throws IllegalArgumentException {
+		EntityManager em = PersistenceFactory.createEntityManager();
 
 		try {
-			session.getTransaction().commit();
-			return true;
-		} catch (Exception e) {
-			session.getTransaction().rollback();
-			return false;
+			return em.find(this.persistentClass, pk);
+		} catch (IllegalArgumentException e) {
+			throw e;
 		} finally {
-			session.close();
+			em.close();
+		}
+	}
+
+	public T find(String pk) throws IllegalArgumentException {
+		EntityManager em = PersistenceFactory.createEntityManager();
+
+		try {
+			return em.find(this.persistentClass, pk);
+		} catch (IllegalArgumentException e) {
+			throw e;
+		} finally {
+			em.close();
 		}
 	}
 }
