@@ -2,8 +2,11 @@ package br.gumn.bean;
 
 import java.io.File;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -11,12 +14,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import br.gumn.bean.enumeration.Degree;
 
 @Entity
@@ -40,61 +37,45 @@ public class Researcher {
 
 	private String rg;
 
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	private Degree degree;
 
-	@OneToOne
+	@OneToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_Address", insertable = true, updatable = true)
-	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.ALL)
 	private Address address;
 
-	@OneToMany(mappedBy = "researcher")
-	@Cascade(CascadeType.ALL)
-	private List<Association> associations;
+	@OneToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_User", insertable = true, updatable = true)
+	private User user;
 
-	@ManyToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "Department_Researcher", schema = "reman", joinColumns = @JoinColumn(name = "id_Researcher"), inverseJoinColumns = @JoinColumn(name = "id_Department"))
+	@ManyToMany(mappedBy = "members")
 	private List<Department> departments;
 
-	@OneToMany(mappedBy = "researcher")
-	@Cascade(CascadeType.ALL)
-	private List<Link> links;
-
-	@ManyToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "Project_Researcher", schema = "reman", joinColumns = @JoinColumn(name = "id_Researcher"), inverseJoinColumns = @JoinColumn(name = "id_Project"))
+	@ManyToMany(mappedBy = "members")
 	private List<Project> projects;
 
-	@ManyToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "Publication_Researcher", schema = "reman", joinColumns = @JoinColumn(name = "id_Researcher"), inverseJoinColumns = @JoinColumn(name = "id_Publication"))
+	@ManyToMany(mappedBy = "authors")
 	private List<Publication> publications;
 
 	@ManyToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "Researcher_ResearchLine", schema = "reman", joinColumns = @JoinColumn(name = "id_Researcher"), inverseJoinColumns = @JoinColumn(name = "id_ResearchLine"))
 	private List<ResearchLine> researchLines;
 
 	@ManyToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "Researcher_Team", schema = "reman", joinColumns = @JoinColumn(name = "id_Researcher"), inverseJoinColumns = @JoinColumn(name = "id_Team"))
 	private List<Team> teams;
 
 	@OneToMany(mappedBy = "researcher")
-	@Cascade(CascadeType.ALL)
-	private List<Title> titles;
+	private List<Association> associations;
+
+	@OneToMany(mappedBy = "researcher")
+	private List<Link> links;
 
 	@OneToMany(mappedBy = "advisor")
-	@Cascade(CascadeType.ALL)
 	private List<Title> supervisionedTitles;
 
-	@OneToOne
-	@JoinColumn(name = "id_User", insertable = true, updatable = true)
-	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.ALL)
-	private User user;
+	@OneToMany(mappedBy = "researcher")
+	private List<Title> titles;
 
 	public String getCpf() {
 		return cpf;

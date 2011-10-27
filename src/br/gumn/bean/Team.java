@@ -10,11 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name = "Team", schema = "reman")
@@ -35,29 +32,19 @@ public class Team {
 	@Column(name = "Activity")
 	private List<String> activities;
 
-	@ManyToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "Department_Team", schema = "reman", joinColumns = @JoinColumn(name = "id_Team"), inverseJoinColumns = @JoinColumn(name = "id_Department"))
+	@ManyToMany(mappedBy = "teams")
 	private List<Department> departments;
 
-	@ManyToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "Project_Team", schema = "reman", joinColumns = @JoinColumn(name = "id_Team"), inverseJoinColumns = @JoinColumn(name = "id_Project"))
+	@ManyToMany(mappedBy = "teams")
 	private List<Project> projects;
 
-	@ManyToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "Publication_Team", schema = "reman", joinColumns = @JoinColumn(name = "id_Team"), inverseJoinColumns = @JoinColumn(name = "id_Publication"))
+	@ManyToMany(mappedBy = "teams")
 	private List<Publication> publications;
 
-	@ManyToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "Researcher_Team", schema = "reman", joinColumns = @JoinColumn(name = "id_Team"), inverseJoinColumns = @JoinColumn(name = "id_Researcher"))
+	@ManyToMany(mappedBy = "teams")
 	private List<Researcher> members;
 
-	@ManyToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name = "ResearchLine_Team", schema = "reman", joinColumns = @JoinColumn(name = "id_Team"), inverseJoinColumns = @JoinColumn(name = "id_ResearchLine"))
+	@ManyToMany(mappedBy = "teams")
 	private List<ResearchLine> researchLines;
 
 	public int getId() {

@@ -1,17 +1,17 @@
 package br.gumn.bean;
 
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "Association", schema = "reman")
@@ -21,20 +21,17 @@ public class Association {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
+	@Temporal(TemporalType.DATE)
 	private Date date;
 
 	private int number;
 
-	@ManyToOne
+	@ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_Institution", insertable = true, updatable = true)
-	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.ALL)
 	private Institution institution;
 
-	@ManyToOne
+	@ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_Researcher", insertable = true, updatable = true)
-	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.ALL)
 	private Researcher researcher;
 
 	public int getId() {

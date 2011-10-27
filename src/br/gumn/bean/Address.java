@@ -6,8 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "Address", schema = "reman")
@@ -30,15 +28,12 @@ public class Address {
 	private String zipCode;
 
 	@OneToOne(mappedBy = "address")
-	@Cascade(CascadeType.ALL)
 	private Department department;
 
 	@OneToOne(mappedBy = "local")
-	@Cascade(CascadeType.ALL)
 	private Publication publication;
 
 	@OneToOne(mappedBy = "address")
-	@Cascade(CascadeType.ALL)
 	private Researcher researcher;
 
 	public int getId() {
