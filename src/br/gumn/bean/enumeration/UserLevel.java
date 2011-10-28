@@ -1,7 +1,21 @@
 package br.gumn.bean.enumeration;
 
+/**
+ * Enum responsável por nomear os tipos de usuários do sistema.
+ * 
+ * @author Gert Uchôa Müller Neto
+ * @version v1.23092011.1342
+ */
 public enum UserLevel {
-	Administrator(1, "Administrator"), User(2, "User");
+	/**
+	 * Administrador
+	 */
+	Administrator(1, "Administrator"),
+
+	/**
+	 * Usuário Comum
+	 */
+	User(2, "User");
 
 	private final int id;
 	private final String level;
@@ -11,11 +25,21 @@ public enum UserLevel {
 		this.level = level;
 	}
 
-	public int levelId() {
+	/**
+	 * Método responsável pela obtenção do id do valor do Enum.
+	 * 
+	 * @return int
+	 */
+	public int getId() {
 		return this.id;
 	}
 
-	public String levelDescription() {
+	/**
+	 * Método responsável pela obtenção da descrição do valor do Enum.
+	 * 
+	 * @return String
+	 */
+	public String getDescription() {
 		return this.level;
 	}
 }

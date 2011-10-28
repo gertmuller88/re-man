@@ -1,8 +1,36 @@
 package br.gumn.bean.enumeration;
 
+/**
+ * Enum responsável por listar os tipos de pesquisadores.
+ * 
+ * @author Gert Uchôa Müller Neto
+ * @version v1.23092011.1342
+ */
 public enum ResearcherType {
-	Professor(1, "Professor"), Advisor(2, "Advisor"), Coordinator(3,
-			"Coordinator"), Student(4, "Student"), Mentee(5, "Mentee");
+	/**
+	 * Professor.
+	 */
+	Professor(1, "Professor"),
+
+	/**
+	 * Orientador.
+	 */
+	Advisor(2, "Advisor"),
+
+	/**
+	 * Coordenador.
+	 */
+	Coordinator(3, "Coordinator"),
+
+	/**
+	 * Estudante.
+	 */
+	Student(4, "Student"),
+
+	/**
+	 * Orientando.
+	 */
+	Mentee(5, "Mentee");
 
 	private final int id;
 	private final String type;
@@ -12,11 +40,21 @@ public enum ResearcherType {
 		this.type = type;
 	}
 
-	public int typeId() {
+	/**
+	 * Método responsável pela obtenção do id do valor do Enum.
+	 * 
+	 * @return int
+	 */
+	public int getId() {
 		return this.id;
 	}
 
-	public String typeDescription() {
+	/**
+	 * Método responsável pela obtenção da descrição do valor do Enum.
+	 * 
+	 * @return String
+	 */
+	public String getDescription() {
 		return this.type;
 	}
 }
