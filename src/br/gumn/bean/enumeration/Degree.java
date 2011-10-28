@@ -43,7 +43,7 @@ public enum Degree {
 	/**
 	 * Método responsável pela obtenção do id do valor do Enum.
 	 * 
-	 * @return int
+	 * @return Integer
 	 */
 	public int getId() {
 		return this.id;
