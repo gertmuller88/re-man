@@ -28,8 +28,8 @@ public abstract class AbstractDAO<T> {
 	/**
 	 * Método responsável pela persistência de uma instância.
 	 * 
-	 * @param t Entidade persistente.
-	 * @return boolean
+	 * @param t T
+	 * @return Boolean
 	 * @throws EntityExistsException
 	 * @throws IllegalArgumentException
 	 * @throws TransactionRequiredException
@@ -65,8 +65,8 @@ public abstract class AbstractDAO<T> {
 	/**
 	 * Método responsável pela atualização de uma instância.
 	 * 
-	 * @param t Entidade persistente.
-	 * @return boolean
+	 * @param t T
+	 * @return Boolean
 	 * @throws IllegalArgumentException
 	 * @throws TransactionRequiredException
 	 */
@@ -93,8 +93,8 @@ public abstract class AbstractDAO<T> {
 	/**
 	 * Método responsável pela remoção de uma instância.
 	 * 
-	 * @param t Entidade Persistente
-	 * @return boolean
+	 * @param t T
+	 * @return Boolean
 	 * @throws IllegalArgumentException
 	 * @throws TransactionRequiredException
 	 */
@@ -122,8 +122,8 @@ public abstract class AbstractDAO<T> {
 	 * Método responsável pela busca de uma instância da classe persistente pela
 	 * chave-primária.
 	 * 
-	 * @param pk int
-	 * @return boolean
+	 * @param pk Integer
+	 * @return Boolean
 	 * @throws IllegalArgumentException
 	 */
 	public T find(int pk) throws IllegalArgumentException {
@@ -143,7 +143,7 @@ public abstract class AbstractDAO<T> {
 	 * chave-primária.
 	 * 
 	 * @param pk String
-	 * @return boolean
+	 * @return Boolean
 	 * @throws IllegalArgumentException
 	 */
 	public T find(String pk) throws IllegalArgumentException {
