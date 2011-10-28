@@ -10,7 +10,7 @@ import javax.persistence.TransactionRequiredException;
  * Classe abstrata responsável por fornecer encapsulamento no acesso aos dados.
  * 
  * @author Gert Uchôa Müller Neto
- * @param <T> Classe persistente
+ * @param <T> Classe Persistente
  * @version v1.23092011.1342
  */
 public abstract class AbstractDAO<T> {
