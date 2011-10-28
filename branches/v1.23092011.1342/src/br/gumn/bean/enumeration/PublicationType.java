@@ -1,11 +1,56 @@
 package br.gumn.bean.enumeration;
 
+/**
+ * Enum responsável por listar os tipos de publicação acadêmica.
+ * 
+ * @author Gert Uchôa Müller Neto
+ * @version v1.23092011.1342
+ */
 public enum PublicationType {
-	PeriodicArticle(1, "Periodic Article"), ConferenceArticle(2,
-			"Conference Article"), WorkshopArticle(3, "Workshop Article"), MagazineText(
-			4, "Magazine/Journal text"), Monography(5, "Monography"), Dissertation(
-			6, "Dissertation"), Thesis(7, "Thesis"), Chapter(8, "Book Chapter"), Book(
-			9, "Book");
+	/**
+	 * Artigos publicados em periódicos
+	 */
+	PeriodicArticle(1, "Periodic Article"),
+
+	/**
+	 * Artigos publicados em conferências
+	 */
+	ConferenceArticle(2, "Conference Article"),
+
+	/**
+	 * Artigos publicados em workshops
+	 */
+	WorkshopArticle(3, "Workshop Article"),
+
+	/**
+	 * Texto publicado em revistas
+	 */
+	MagazineText(4, "Magazine/Journal text"),
+
+	/**
+	 * Monografia
+	 */
+	Monography(5, "Monography"),
+
+	/**
+	 * Dissertação
+	 */
+	Dissertation(6, "Dissertation"),
+
+	/**
+	 * Tese
+	 */
+	Thesis(7, "Thesis"),
+
+	/**
+	 * Capítulo de Livro
+	 */
+	Chapter(8, "Book Chapter"),
+
+	/**
+	 * Livro
+	 */
+	Book(9, "Book");
 
 	private final int id;
 	private final String type;
@@ -15,11 +60,21 @@ public enum PublicationType {
 		this.type = type;
 	}
 
-	public int typeId() {
+	/**
+	 * Método responsável pela obtenção do id do valor do Enum.
+	 * 
+	 * @return int
+	 */
+	public int getId() {
 		return this.id;
 	}
 
-	public String typeDescription() {
+	/**
+	 * Método responsável pela obtenção da descrição do valor do Enum.
+	 * 
+	 * @return String
+	 */
+	public String getDescription() {
 		return this.type;
 	}
 }

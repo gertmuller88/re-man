@@ -6,15 +6,35 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.TransactionRequiredException;
 
+/**
+ * Classe abstrata responsável por fornecer encapsulamento no acesso aos dados.
+ * 
+ * @author Gert Uchôa Müller Neto
+ * @param <T> Classe persistente
+ * @version v1.23092011.1342
+ */
 public abstract class AbstractDAO<T> {
 	private Class<T> persistentClass;
 
+	/**
+	 * Método pela instanciação e extração da classe persistente.
+	 */
 	@SuppressWarnings("unchecked")
 	public AbstractDAO() {
 		this.persistentClass = (Class<T>) ((ParameterizedType) getClass()
 				.getGenericSuperclass()).getActualTypeArguments()[0];
 	}
 
+	/**
+	 * Método responsável pela persistência de uma instância.
+	 * 
+	 * @param t Entidade persistente.
+	 * @return boolean
+	 * @throws EntityExistsException
+	 * @throws IllegalArgumentException
+	 * @throws TransactionRequiredException
+	 * @throws PersistenceException
+	 */
 	public boolean persist(T t) throws EntityExistsException,
 			IllegalArgumentException, TransactionRequiredException,
 			PersistenceException {
@@ -42,6 +62,14 @@ public abstract class AbstractDAO<T> {
 		}
 	}
 
+	/**
+	 * Método responsável pela atualização de uma instância.
+	 * 
+	 * @param t Entidade persistente.
+	 * @return boolean
+	 * @throws IllegalArgumentException
+	 * @throws TransactionRequiredException
+	 */
 	public boolean merge(T t) throws IllegalArgumentException,
 			TransactionRequiredException {
 		EntityManager em = PersistenceFactory.createEntityManager();
@@ -62,6 +90,14 @@ public abstract class AbstractDAO<T> {
 		}
 	}
 
+	/**
+	 * Método responsável pela remoção de uma instância.
+	 * 
+	 * @param t Entidade Persistente
+	 * @return boolean
+	 * @throws IllegalArgumentException
+	 * @throws TransactionRequiredException
+	 */
 	public boolean remove(T t) throws IllegalArgumentException,
 			TransactionRequiredException {
 		EntityManager em = PersistenceFactory.createEntityManager();
@@ -82,6 +118,14 @@ public abstract class AbstractDAO<T> {
 		}
 	}
 
+	/**
+	 * Método responsável pela busca de uma instância da classe persistente pela
+	 * chave-primária.
+	 * 
+	 * @param pk int
+	 * @return boolean
+	 * @throws IllegalArgumentException
+	 */
 	public T find(int pk) throws IllegalArgumentException {
 		EntityManager em = PersistenceFactory.createEntityManager();
 
@@ -94,6 +138,14 @@ public abstract class AbstractDAO<T> {
 		}
 	}
 
+	/**
+	 * Método responsável pela busca de uma instância da classe persistente pela
+	 * chave-primária.
+	 * 
+	 * @param pk String
+	 * @return boolean
+	 * @throws IllegalArgumentException
+	 */
 	public T find(String pk) throws IllegalArgumentException {
 		EntityManager em = PersistenceFactory.createEntityManager();
 
