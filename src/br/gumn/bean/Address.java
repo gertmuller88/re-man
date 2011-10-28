@@ -50,7 +50,7 @@ public class Address {
 	}
 
 	/**
-	 * @param id
+	 * @param id Integer
 	 */
 	public void setId(int id) {
 		this.id = id;
@@ -64,7 +64,7 @@ public class Address {
 	}
 
 	/**
-	 * @param city
+	 * @param city String
 	 */
 	public void setCity(String city) {
 		this.city = city;
@@ -78,7 +78,7 @@ public class Address {
 	}
 
 	/**
-	 * @param country
+	 * @param country String
 	 */
 	public void setCountry(String country) {
 		this.country = country;
@@ -92,7 +92,7 @@ public class Address {
 	}
 
 	/**
-	 * @param district
+	 * @param district String
 	 */
 	public void setDistrict(String district) {
 		this.district = district;
@@ -106,7 +106,7 @@ public class Address {
 	}
 
 	/**
-	 * @param number
+	 * @param number Integer
 	 */
 	public void setNumber(int number) {
 		this.number = number;
@@ -120,7 +120,7 @@ public class Address {
 	}
 
 	/**
-	 * @param street
+	 * @param street String
 	 */
 	public void setStreet(String street) {
 		this.street = street;
@@ -134,7 +134,7 @@ public class Address {
 	}
 
 	/**
-	 * @param zipCode
+	 * @param zipCode String
 	 */
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
@@ -148,7 +148,7 @@ public class Address {
 	}
 
 	/**
-	 * @param department
+	 * @param department Department
 	 */
 	public void setDepartment(Department department) {
 		this.department = department;
@@ -162,7 +162,7 @@ public class Address {
 	}
 
 	/**
-	 * @param publication
+	 * @param publication Publication
 	 */
 	public void setPublication(Publication publication) {
 		this.publication = publication;
@@ -176,7 +176,7 @@ public class Address {
 	}
 
 	/**
-	 * @param researcher
+	 * @param researcher Researcher
 	 */
 	public void setResearcher(Researcher researcher) {
 		this.researcher = researcher;
