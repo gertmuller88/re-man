@@ -17,7 +17,7 @@ public abstract class AbstractDAO<T> {
 	private Class<T> persistentClass;
 
 	/**
-	 * Método pela instanciação e extração da classe persistente.
+	 * Método responsável pela instanciação e extração da classe persistente.
 	 */
 	@SuppressWarnings("unchecked")
 	public AbstractDAO() {
