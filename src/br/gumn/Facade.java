@@ -2,7 +2,7 @@ package br.gumn;
 
 /**
  * Classe responsável por fornecer ligação entre a camada de visualização e de
- * negócios, seguindo o padrão MVC2.
+ * controle, seguindo o padrão MVC2.
  * 
  * @author Gert Uchôa Müller Neto
  * @version v1.23092011.1342
