@@ -3,3 +3,36 @@ Thu Nov 03 05:05:09 GMT-03:00 2011 - Persisting br.gumn.bean.Department@1bf73fa.
 Thu Nov 03 05:05:13 GMT-03:00 2011 - Persisting return of br.gumn.bean.Department@1bf73fa: true.
 Thu Nov 03 05:05:13 GMT-03:00 2011 - End persisting br.gumn.bean.Department@1bf73fa
 /---------------------------------------------------------------------------------------------------/
+
+/--------------------------------------------- PERSIST ---------------------------------------------/
+Thu Nov 03 09:09:14 GMT-03:00 2011 - Persisting br.gumn.bean.Department@1963b3e.
+Thu Nov 03 09:10:57 GMT-03:00 2011 - Exception in persisting of br.gumn.bean.Department@1963b3e.
+								   - Exception Message: org.hibernate.exception.SQLGrammarException: could not insert: [br.gumn.bean.Department]
+								   - Exception Cause: could not insert: [br.gumn.bean.Department]
+Thu Nov 03 09:10:57 GMT-03:00 2011 - End persisting br.gumn.bean.Department@1963b3e.
+/---------------------------------------------------------------------------------------------------/
+
+/--------------------------------------------- PERSIST ---------------------------------------------/
+Thu Nov 03 09:11:06 GMT-03:00 2011 - Persisting br.gumn.bean.Department@1963b3e.
+Thu Nov 03 09:11:10 GMT-03:00 2011 - Persisting return of br.gumn.bean.Department@1963b3e: true.
+Thu Nov 03 09:11:10 GMT-03:00 2011 - End persisting br.gumn.bean.Department@1963b3e.
+/---------------------------------------------------------------------------------------------------/
+
+/--------------------------------------------- PERSIST ---------------------------------------------/
+Thu Nov 03 09:17:03 GMT-03:00 2011 - Persisting br.gumn.bean.Department@1963b3e.
+Thu Nov 03 09:17:07 GMT-03:00 2011 - Persisting return of br.gumn.bean.Department@1963b3e: true.
+Thu Nov 03 09:17:07 GMT-03:00 2011 - End persisting br.gumn.bean.Department@1963b3e.
+/---------------------------------------------------------------------------------------------------/
+
+/--------------------------------------------- PERSIST ---------------------------------------------/
+Thu Nov 03 09:24:18 GMT-03:00 2011 - Persisting br.gumn.bean.Department@b6548.
+Thu Nov 03 09:24:22 GMT-03:00 2011 - Persisting return of br.gumn.bean.Department@b6548: true.
+Thu Nov 03 09:24:22 GMT-03:00 2011 - End persisting br.gumn.bean.Department@b6548.
+/---------------------------------------------------------------------------------------------------/
+
+/--------------------------------------------- PERSIST ---------------------------------------------/
+Thu Nov 03 09:24:56 GMT-03:00 2011 - Persisting br.gumn.bean.Department@1963b3e.
+Thu Nov 03 09:24:59 GMT-03:00 2011 - Persisting return of br.gumn.bean.Department@1963b3e: true.
+Thu Nov 03 09:24:59 GMT-03:00 2011 - End persisting br.gumn.bean.Department@1963b3e.
+/---------------------------------------------------------------------------------------------------/
+
