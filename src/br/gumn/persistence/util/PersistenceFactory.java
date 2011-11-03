@@ -9,11 +9,9 @@ import javax.persistence.Persistence;
  * 
  * @author Gert Uchôa Müller Neto
  * @version v1.23092011.1342
- * @see EntityManager EntityManagerFactory
  */
 public class PersistenceFactory {
-	private static EntityManagerFactory emf = Persistence
-			.createEntityManagerFactory("reman");
+	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("reman");
 	private static EntityManager em;
 
 	/**
@@ -23,9 +21,7 @@ public class PersistenceFactory {
 	 * @return EntityManager
 	 */
 	public static EntityManager createEntityManager() {
-		if (em == null) {
-			return em = emf.createEntityManager();
-		} else if (!em.isOpen()) {
+		if (em == null || !em.isOpen()) {
 			return em = emf.createEntityManager();
 		} else {
 			return em;

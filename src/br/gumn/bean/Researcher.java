@@ -46,11 +46,11 @@ public class Researcher {
 	@Enumerated(EnumType.STRING)
 	private Degree degree;
 
-	@OneToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(optional = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_Address", insertable = true, updatable = true)
 	private Address address;
 
-	@OneToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(optional = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_User", insertable = true, updatable = true)
 	private User user;
 

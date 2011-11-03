@@ -51,11 +51,11 @@ public class Publication {
 	@Enumerated(EnumType.STRING)
 	private PublicationType type;
 
-	@OneToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(optional = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_Address", insertable = true, updatable = true)
 	private Address local;
 
-	@OneToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(optional = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_Link", insertable = true, updatable = true)
 	private Link doi;
 
