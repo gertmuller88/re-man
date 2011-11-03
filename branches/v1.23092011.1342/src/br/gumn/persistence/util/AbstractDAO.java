@@ -1,6 +1,7 @@
 package br.gumn.persistence.util;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
@@ -123,7 +124,7 @@ public abstract class AbstractDAO<T> {
 	 * chave-primária.
 	 * 
 	 * @param pk Integer
-	 * @return Boolean
+	 * @return T
 	 * @throws IllegalArgumentException
 	 */
 	public T find(int pk) throws IllegalArgumentException {
@@ -143,7 +144,7 @@ public abstract class AbstractDAO<T> {
 	 * chave-primária.
 	 * 
 	 * @param pk String
-	 * @return Boolean
+	 * @return T
 	 * @throws IllegalArgumentException
 	 */
 	public T find(String pk) throws IllegalArgumentException {
@@ -151,6 +152,26 @@ public abstract class AbstractDAO<T> {
 
 		try {
 			return em.find(this.persistentClass, pk);
+		} catch (IllegalArgumentException e) {
+			throw e;
+		} finally {
+			em.close();
+		}
+	}
+
+	/**
+	 * Método responsável pela busca de uma instância da classe persistente pela
+	 * chave-primária.
+	 * 
+	 * @return List<T>
+	 * @throws IllegalArgumentException
+	 */
+	@SuppressWarnings("unchecked")
+	public List<T> list() throws IllegalArgumentException {
+		EntityManager em = PersistenceFactory.createEntityManager();
+		
+		try {
+			return em.createQuery("from " + persistentClass.getSimpleName()).getResultList();
 		} catch (IllegalArgumentException e) {
 			throw e;
 		} finally {

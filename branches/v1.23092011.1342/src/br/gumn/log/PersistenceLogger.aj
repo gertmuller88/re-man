@@ -19,12 +19,16 @@ public aspect PersistenceLogger {
 	private static SimpleDateFormat sdf;
 	
 	/**
-	 * @throws FileNotFoundException
+	 * 
 	 */
-	public void updateFile() throws FileNotFoundException {
-		sdf = new SimpleDateFormat("yyyy-MM-dd");
-		file = new File("WebContent/logs/persistence." + sdf.format(new Date()) + ".txt");
-		fos = new FileOutputStream(file, true);
+	public void updateFile() {
+		try {
+			sdf = new SimpleDateFormat("yyyy-MM-dd");
+			file = new File("WebContent/logs/persistence." + sdf.format(new Date()) + ".txt");
+			fos = new FileOutputStream(file, true);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		out = new PrintWriter(fos);
 	}
 	
@@ -33,20 +37,20 @@ public aspect PersistenceLogger {
 	pointcut remove(Object o) : execution(* AbstractDAO+.remove(*)) && args(o);
 	pointcut find(Object o) : execution(* AbstractDAO+.find(*)) && args(o);
 	
-	before(Object o) throws FileNotFoundException : persist(o) {
+	before(Object o) : persist(o) {
 		this.updateFile();
 		out.println("/--------------------------------------------- PERSIST ---------------------------------------------/");
 		out.println(new Date().toString() + " - Persisting " + o.toString() + ".");
 		out.flush();
 	}
 	
-	after(Object o) returning(Object ob) throws FileNotFoundException : persist(o) {
+	after(Object o) returning(Object ob) : persist(o) {
 		this.updateFile();
 		out.println(new Date().toString() + " - Persisting return of " + o.toString() + ": " + ob.toString() + ".");
 		out.flush();
 	}
 	
-	after(Object o) throwing(Exception e) throws FileNotFoundException : persist(o) {
+	after(Object o) throwing(Exception e) : persist(o) {
 		this.updateFile();
 		out.println(new Date().toString() + " - Exception in persisting of " + o.toString() + ".");
 		out.println("								   - Exception Message: " + e.getMessage());
@@ -54,10 +58,11 @@ public aspect PersistenceLogger {
 		out.flush();
 	}
 	
-	after(Object o) throws FileNotFoundException : persist(o) {
+	after(Object o) : persist(o) {
 		this.updateFile();
 		out.println(new Date().toString() + " - End persisting " + o.toString() + ".");
 		out.println("/---------------------------------------------------------------------------------------------------/");
+		out.println();
 		out.flush();
 	}
 	
