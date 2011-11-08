@@ -1,4 +1,4 @@
-package br.gumn.control;
+package br.gumn.application.control;
 
 public class TeamController {
 
