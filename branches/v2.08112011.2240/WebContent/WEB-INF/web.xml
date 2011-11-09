@@ -9,7 +9,7 @@
 	<display-name>Re-Man (Research Management System)</display-name>
 	
 	<welcome-file-list>
-		<welcome-file>login.jsf</welcome-file>
+		<welcome-file>index.jsf</welcome-file>
 	</welcome-file-list>
 
 	<servlet>
