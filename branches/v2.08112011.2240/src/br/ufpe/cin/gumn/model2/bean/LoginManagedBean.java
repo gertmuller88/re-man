@@ -1,28 +1,34 @@
-package br.ufpe.cin.gumn.model2;
+package br.ufpe.cin.gumn.model2.bean;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import br.ufpe.cin.gumn.application.bean.Researcher;
 import br.ufpe.cin.gumn.application.bean.User;
 
-@SessionScoped
-@ManagedBean
 public class LoginManagedBean {
 	private String login;
 	private String password;
 	private User user;
-	private boolean access;
 	
 	public String logIn() {
-		if(login.equals("gert") && password.equals("12345")) {
+		if(login.equals("gertmuller88") && password.equals("12345")) {
 			user = new User();
 			user.setLogin(login);
 			user.setPassword(password);
+			user.setResearcher(new Researcher());
+			user.getResearcher().setName("Gert Müller");
 			
 			return "home";
 		} else {
-			access = false;
+			user = null;
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuário ou senha inválidos."));
 			return "login";
 		}
+	}
+	
+	public String logOut() {
+		user = null;
+		return "login";
 	}
 
 	public String getLogin() {
@@ -47,13 +53,5 @@ public class LoginManagedBean {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public boolean isAccess() {
-		return access;
-	}
-
-	public void setAccess(boolean access) {
-		this.access = access;
 	}
 }
