@@ -1,4 +1,4 @@
-package br.gumn.log;
+package br.ufpe.cin.gumn.application.log;
 
 import java.io.File;
 import java.io.FileNotFoundException;
