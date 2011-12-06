@@ -18,17 +18,17 @@ public class LoginManagedBean {
 			user.setResearcher(new Researcher());
 			user.getResearcher().setName("Gert Müller");
 			
-			return "home";
+			return "pretty:home";
 		} else {
 			user = null;
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuário ou senha inválidos."));
-			return "login";
+			return "pretty:login";
 		}
 	}
 	
 	public String logOut() {
 		user = null;
-		return "login";
+		return "pretty:login";
 	}
 
 	public String getLogin() {

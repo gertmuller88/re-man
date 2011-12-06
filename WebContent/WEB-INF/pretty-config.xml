@@ -7,19 +7,25 @@
 		// These are custom rewrite-rules, and are probably not necessary for your application.
 		<rewrite match="^/old-url/(\w+)/$" substitute="/new_url/$1/" redirect="301" />
 	-->
+	
+	<rewrite match="^/(.*)/$" substitute="/$1" redirect="301" />
+
+	<url-mapping id="home"> 
+		<pattern value="/home"/> 
+		<view-id value="/faces/home.jsf"/>
+	</url-mapping> 
+
+	<url-mapping id="login"> 
+		<pattern value="/login"/> 
+		<view-id value="/faces/login.jsf"/>
+	</url-mapping> 
+	
+	<url-mapping id="index">
+		<pattern value="/"/>
+		<view-id value="/faces/index.jsf"/>
+	</url-mapping>
 
 	<!-- Begin UrlMappings 
-		// These are examples of URL mappings, and should be customized for your application.
-		<url-mapping id="home"> 
-			<pattern value="/" /> 
-			<view-id value="/faces/index.jsf" />
-		</url-mapping> 
-
-		<url-mapping id="store"> 
-			<pattern value="/store/" /> 
-			<view-id value="/faces/shop/store.jsf" />
-		</url-mapping> 
-
 		<url-mapping id="viewCategory">
 			<pattern value="/store/#{ cat : bean.category }/" />
 			<view-id value="/faces/shop/store.jsf" />

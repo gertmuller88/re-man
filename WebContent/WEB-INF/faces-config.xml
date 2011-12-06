@@ -13,6 +13,7 @@
 	<lifecycle>
 		<phase-listener>br.ufpe.cin.gumn.model2.listener.PostRedirectGetListener</phase-listener>
 		<phase-listener>br.ufpe.cin.gumn.model2.listener.AuthenticationListener</phase-listener>
+		<phase-listener>com.ocpsoft.pretty.faces.event.MultiPageMessagesSupport</phase-listener>
 	</lifecycle>
 	
 </faces-config>

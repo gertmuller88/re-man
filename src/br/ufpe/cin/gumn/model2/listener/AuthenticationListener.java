@@ -8,7 +8,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import javax.faces.FacesException;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
@@ -17,6 +16,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
+import javax.servlet.http.HttpServletResponse;
+import com.ocpsoft.pretty.PrettyContext;
+import com.ocpsoft.pretty.faces.config.mapping.UrlMapping;
 import br.ufpe.cin.gumn.application.bean.User;
 import br.ufpe.cin.gumn.model2.bean.LoginManagedBean;
 
@@ -48,12 +50,12 @@ public class AuthenticationListener implements PhaseListener {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Você precisa fazer login para utilizar este recurso."));
 				saveFacesMessages(facesContext);
 				saveUIInputValues(facesContext);
-				redirect(facesContext, "login");
+				redirectPretty(facesContext, "login");
 				sessionMap.put(AUTH_DONE_ID, true);
 			} else if(isLoginPage && user!=null) {
 				saveFacesMessages(facesContext);
 				saveUIInputValues(facesContext);
-				redirect(facesContext, "home");
+				redirectPretty(facesContext, "home");
 				sessionMap.put(AUTH_DONE_ID, true);
 			}
 		}
@@ -98,13 +100,16 @@ public class AuthenticationListener implements PhaseListener {
 		}
 	}
 	
-	private static void redirect(FacesContext facesContext, String viewId) {
-		String url = facesContext.getApplication().getViewHandler().getActionURL(facesContext, "/" + viewId + ".xhtml");
-
+	private static void redirectPretty(FacesContext facesContext, String viewId) {
+		PrettyContext context = PrettyContext.getCurrentInstance();
+		UrlMapping mapping = context.getConfig().getMappingById(viewId);
+		
+		HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+		String url = response.encodeRedirectURL(context.getContextPath() + mapping.getPattern());
 		try {
-			facesContext.getExternalContext().redirect(url);
+			response.sendRedirect(url);
 		} catch(IOException e) {
-			throw new FacesException("Cannot redirect to " + url + " due to IO exception.", e);
+			e.printStackTrace();
 		}
 	}
 
