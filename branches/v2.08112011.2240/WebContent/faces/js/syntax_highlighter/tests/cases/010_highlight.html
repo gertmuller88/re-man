@@ -1,14 +1,3 @@
-<pre id="sh_010_highlight_a" class="brush: groovy; highlight: 2">
-	public function validateStrongPassword(password:String):Boolean
-	{
-		if (password == null || password.length <= 0)
-		{
-			return false;
-		}
-		
-		return STRONG_PASSWORD_PATTERN.test(password);
-	}
-</pre>
 <script id="sh_010_highlight_b" type="syntaxhighlighter" class="brush: as3; highlight: [2, 4, 12]"><![CDATA[
 	/**
 	 * Checks a password and returns a value indicating whether the password is a "strong" 
