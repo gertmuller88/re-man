@@ -1,7 +1,7 @@
 package br.gumn.application.bean;
 
 import java.io.File;
-import java.util.List;
+import java.util.Set;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 /**
@@ -37,26 +38,31 @@ public class Project {
 	@ElementCollection
 	@CollectionTable(name = "Project_Objectives", joinColumns = @JoinColumn(name = "id_Project"))
 	@Column(name = "Objective")
-	private List<String> objectives;
+	private Set<String> objectives;
 
 	@ManyToMany(mappedBy = "projects")
-	private List<Department> departments;
+	@OrderBy("name")
+	private Set<Department> departments;
 
 	@ManyToMany
+	@OrderBy("date")
 	@JoinTable(name = "Project_Publication", schema = "reman", joinColumns = @JoinColumn(name = "id_Project"), inverseJoinColumns = @JoinColumn(name = "id_Publication"))
-	private List<Publication> publications;
+	private Set<Publication> publications;
 
 	@ManyToMany
+	@OrderBy("name")
 	@JoinTable(name = "Project_Researcher", schema = "reman", joinColumns = @JoinColumn(name = "id_Project"), inverseJoinColumns = @JoinColumn(name = "id_Researcher"))
-	private List<Researcher> members;
+	private Set<Researcher> members;
 
 	@ManyToMany
+	@OrderBy("title")
 	@JoinTable(name = "Project_ResearchLine", schema = "reman", joinColumns = @JoinColumn(name = "id_Project"), inverseJoinColumns = @JoinColumn(name = "id_ResearchLine"))
-	private List<ResearchLine> researchLines;
+	private Set<ResearchLine> researchLines;
 
 	@ManyToMany
+	@OrderBy("name")
 	@JoinTable(name = "Project_Team", schema = "reman", joinColumns = @JoinColumn(name = "id_Project"), inverseJoinColumns = @JoinColumn(name = "id_Team"))
-	private List<Team> teams;
+	private Set<Team> teams;
 
 	/**
 	 * @return Integer
@@ -115,86 +121,86 @@ public class Project {
 	}
 
 	/**
-	 * @return List<String>
+	 * @return Set<String>
 	 */
-	public List<String> getObjectives() {
+	public Set<String> getObjectives() {
 		return objectives;
 	}
 
 	/**
-	 * @param objectives List<String>
+	 * @param objectives Set<String>
 	 */
-	public void setObjectives(List<String> objectives) {
+	public void setObjectives(Set<String> objectives) {
 		this.objectives = objectives;
 	}
 
 	/**
-	 * @return List<Department>
+	 * @return Set<Department>
 	 */
-	public List<Department> getDepartments() {
+	public Set<Department> getDepartments() {
 		return departments;
 	}
 
 	/**
-	 * @param departments List<Department>
+	 * @param departments Set<Department>
 	 */
-	public void setDepartments(List<Department> departments) {
+	public void setDepartments(Set<Department> departments) {
 		this.departments = departments;
 	}
 
 	/**
-	 * @return List<Publication>
+	 * @return Set<Publication>
 	 */
-	public List<Publication> getPublications() {
+	public Set<Publication> getPublications() {
 		return publications;
 	}
 
 	/**
-	 * @param publications List<Publication>
+	 * @param publications Set<Publication>
 	 */
-	public void setPublications(List<Publication> publications) {
+	public void setPublications(Set<Publication> publications) {
 		this.publications = publications;
 	}
 
 	/**
-	 * @return List<Researcher>
+	 * @return Set<Researcher>
 	 */
-	public List<Researcher> getMembers() {
+	public Set<Researcher> getMembers() {
 		return members;
 	}
 
 	/**
-	 * @param members List<Researcher>
+	 * @param members Set<Researcher>
 	 */
-	public void setMembers(List<Researcher> members) {
+	public void setMembers(Set<Researcher> members) {
 		this.members = members;
 	}
 
 	/**
-	 * @return List<ResearchLine>
+	 * @return Set<ResearchLine>
 	 */
-	public List<ResearchLine> getResearchLines() {
+	public Set<ResearchLine> getResearchLines() {
 		return researchLines;
 	}
 
 	/**
-	 * @param researchLines List<ResearchLine>
+	 * @param researchLines Set<ResearchLine>
 	 */
-	public void setResearchLines(List<ResearchLine> researchLines) {
+	public void setResearchLines(Set<ResearchLine> researchLines) {
 		this.researchLines = researchLines;
 	}
 
 	/**
-	 * @return List<Team>
+	 * @return Set<Team>
 	 */
-	public List<Team> getTeams() {
+	public Set<Team> getTeams() {
 		return teams;
 	}
 
 	/**
-	 * @param teams List<Team>
+	 * @param teams Set<Team>
 	 */
-	public void setTeams(List<Team> teams) {
+	public void setTeams(Set<Team> teams) {
 		this.teams = teams;
 	}
 }

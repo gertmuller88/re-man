@@ -1,7 +1,6 @@
 package br.gumn.application.persistence;
 
-import java.util.List;
-
+import java.util.Set;
 import br.gumn.application.bean.Department;
 import br.gumn.application.persistence.util.AbstractDAO;
 
@@ -18,9 +17,9 @@ public class DepartmentDAO extends AbstractDAO<Department> {
 	 * Departamento relacionadas a determinado Projeto.
 	 * 
 	 * @param idProject Integer
-	 * @return List<Department>
+	 * @return Set<Department>
 	 */
-	public List<Department> selectByProject(int idProject) {
+	public Set<Department> selectByProject(int idProject) {
 		return new ProjectDAO().find(idProject).getDepartments();
 	}
 
@@ -29,9 +28,9 @@ public class DepartmentDAO extends AbstractDAO<Department> {
 	 * Departamento relacionadas a determinada Publicação.
 	 * 
 	 * @param idPublication Integer
-	 * @return List<Department>
+	 * @return Set<Department>
 	 */
-	public List<Department> selectByPublication(int idPublication) {
+	public Set<Department> selectByPublication(int idPublication) {
 		return new PublicationDAO().find(idPublication).getDepartments();
 	}
 
@@ -40,9 +39,9 @@ public class DepartmentDAO extends AbstractDAO<Department> {
 	 * Departamento relacionadas a determinado Pesquisador.
 	 * 
 	 * @param cpfResearcher String
-	 * @return List<Department>
+	 * @return Set<Department>
 	 */
-	public List<Department> selectByMember(String cpfResearcher) {
+	public Set<Department> selectByMember(String cpfResearcher) {
 		return new ResearcherDAO().find(cpfResearcher).getDepartments();
 	}
 
@@ -51,9 +50,9 @@ public class DepartmentDAO extends AbstractDAO<Department> {
 	 * Departamento relacionadas a determinado Grupo/Time de Pesquisa.
 	 * 
 	 * @param idTeam Integer
-	 * @return List<Department>
+	 * @return Set<Department>
 	 */
-	public List<Department> selectByTeam(int idTeam) {
+	public Set<Department> selectByTeam(int idTeam) {
 		return new TeamDAO().find(idTeam).getDepartments();
 	}
 
@@ -62,9 +61,9 @@ public class DepartmentDAO extends AbstractDAO<Department> {
 	 * Departamento relacionadas a determinada Universidade.
 	 * 
 	 * @param idUniversity Integer
-	 * @return List<Department>
+	 * @return Set<Department>
 	 */
-	public List<Department> selectByUniversity(int idUniversity) {
+	public Set<Department> selectByUniversity(int idUniversity) {
 		return new UniversityDAO().find(idUniversity).getDepartments();
 	}
 }

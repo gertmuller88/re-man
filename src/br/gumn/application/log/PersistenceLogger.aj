@@ -6,12 +6,13 @@ import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import br.gumn.application.persistence.util.AbstractDAO;
 
 /**
- * @author gertmuller88
- *
+ * Aspecto responsável pela geração do log de persistência.
+ * 
+ * @author Gert Uchôa Müller Neto
+ * @version v2.08112011.2240
  */
 public aspect PersistenceLogger {
 	private static File file;
@@ -20,7 +21,7 @@ public aspect PersistenceLogger {
 	private static SimpleDateFormat sdf;
 	
 	/**
-	 * 
+	 * Método responsável por gravar o log no arquivo.
 	 */
 	public void updateFile() {
 		try {
@@ -36,7 +37,6 @@ public aspect PersistenceLogger {
 	pointcut persist(Object o) : execution(* AbstractDAO+.persist(*)) && args(o);
 	pointcut merge(Object o) : execution(* AbstractDAO+.merge(*)) && args(o);
 	pointcut remove(Object o) : execution(* AbstractDAO+.remove(*)) && args(o);
-	pointcut find(Object o) : execution(* AbstractDAO+.find(*)) && args(o);
 	
 	before(Object o) : persist(o) {
 		this.updateFile();
@@ -68,22 +68,60 @@ public aspect PersistenceLogger {
 	}
 	
 	before(Object o) : merge(o) {
-		System.out.append("/----------------------------------------- MERGE -----------------------------------------/");
-		System.out.append("Atualizando objeto " + o.toString());
+		this.updateFile();
+		out.println("/---------------------------------------------- MERGE ----------------------------------------------/");
+		out.println(new Date().toString() + " - Merging " + o.toString() + ".");
+		out.flush();
 	}
 	
 	after(Object o) returning(Object ob) : merge(o) {
-		System.out.println("Retorno da atualização do objeto " + o.toString() + ": " + ob.toString());
+		this.updateFile();
+		out.println(new Date().toString() + " - Merging return of " + o.toString() + ": " + ob.toString() + ".");
+		out.flush();
 	}
 	
-	after(Object o) throwing(Exception e) : merge (o) {
-		System.out.println("Falha na atualização do objeto " + o.toString() + ".");
-		System.out.println("Exceção: " + e.getMessage());
-		System.out.println("Causa: " + e.getCause().getMessage());
+	after(Object o) throwing(Exception e) : merge(o) {
+		this.updateFile();
+		out.println(new Date().toString() + " - Exception in merging of " + o.toString() + ".");
+		out.println("								   - Exception Message: " + e.getMessage());
+		out.println("								   - Exception Cause: " + e.getCause().getMessage());
+		out.flush();
 	}
 	
 	after(Object o) : merge(o) {
-		System.out.println("Fim da atualização do objeto " + o.toString());
-		System.out.println("/-----------------------------------------------------------------------------------------/");
+		this.updateFile();
+		out.println(new Date().toString() + " - End merging " + o.toString() + ".");
+		out.println("/---------------------------------------------------------------------------------------------------/");
+		out.println();
+		out.flush();
+	}
+	
+	before(Object o) : remove(o) {
+		this.updateFile();
+		out.println("/---------------------------------------------- REMOVE ---------------------------------------------/");
+		out.println(new Date().toString() + " - Removing " + o.toString() + ".");
+		out.flush();
+	}
+	
+	after(Object o) returning(Object ob) : remove(o) {
+		this.updateFile();
+		out.println(new Date().toString() + " - Removing return of " + o.toString() + ": " + ob.toString() + ".");
+		out.flush();
+	}
+	
+	after(Object o) throwing(Exception e) : remove(o) {
+		this.updateFile();
+		out.println(new Date().toString() + " - Exception in removing of " + o.toString() + ".");
+		out.println("								   - Exception Message: " + e.getMessage());
+		out.println("								   - Exception Cause: " + e.getCause().getMessage());
+		out.flush();
+	}
+	
+	after(Object o) : remove(o) {
+		this.updateFile();
+		out.println(new Date().toString() + " - End removing " + o.toString() + ".");
+		out.println("/---------------------------------------------------------------------------------------------------/");
+		out.println();
+		out.flush();
 	}
 }

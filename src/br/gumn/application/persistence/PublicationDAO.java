@@ -1,7 +1,6 @@
 package br.gumn.application.persistence;
 
-import java.util.List;
-
+import java.util.Set;
 import br.gumn.application.bean.Publication;
 import br.gumn.application.persistence.util.AbstractDAO;
 
@@ -18,9 +17,9 @@ public class PublicationDAO extends AbstractDAO<Publication> {
 	 * Publicação relacionadas a determinado Departamento.
 	 * 
 	 * @param idDepartment Integer
-	 * @return List<Publication>
+	 * @return Set<Publication>
 	 */
-	public List<Publication> selectByDepartment(int idDepartment) {
+	public Set<Publication> selectByDepartment(int idDepartment) {
 		return new DepartmentDAO().find(idDepartment).getPublications();
 	}
 
@@ -29,9 +28,9 @@ public class PublicationDAO extends AbstractDAO<Publication> {
 	 * Publicação relacionadas a determinado Projeto de Pesquisa.
 	 * 
 	 * @param idProject Integer
-	 * @return List<Publication>
+	 * @return Set<Publication>
 	 */
-	public List<Publication> selectByProject(int idProject) {
+	public Set<Publication> selectByProject(int idProject) {
 		return new ProjectDAO().find(idProject).getPublications();
 	}
 
@@ -40,9 +39,9 @@ public class PublicationDAO extends AbstractDAO<Publication> {
 	 * Publicação relacionadas a determinado Pesquisador.
 	 * 
 	 * @param cpfResearcher String
-	 * @return List<Publication>
+	 * @return Set<Publication>
 	 */
-	public List<Publication> selectByAuthor(String cpfResearcher) {
+	public Set<Publication> selectByAuthor(String cpfResearcher) {
 		return new ResearcherDAO().find(cpfResearcher).getPublications();
 	}
 
@@ -51,9 +50,9 @@ public class PublicationDAO extends AbstractDAO<Publication> {
 	 * Publicação relacionadas a determinada Linha de Pesquisa.
 	 * 
 	 * @param idResearchLine Integer
-	 * @return List<Publication>
+	 * @return Set<Publication>
 	 */
-	public List<Publication> selectByResearchLine(int idResearchLine) {
+	public Set<Publication> selectByResearchLine(int idResearchLine) {
 		return new ResearchLineDAO().find(idResearchLine).getPublications();
 	}
 
@@ -62,9 +61,9 @@ public class PublicationDAO extends AbstractDAO<Publication> {
 	 * Publicação relacionadas a determinado Grupo/Time de Pesquisa.
 	 * 
 	 * @param idTeam Integer
-	 * @return List<Publication>
+	 * @return Set<Publication>
 	 */
-	public List<Publication> selectByTeam(int idTeam) {
+	public Set<Publication> selectByTeam(int idTeam) {
 		return new TeamDAO().find(idTeam).getPublications();
 	}
 }

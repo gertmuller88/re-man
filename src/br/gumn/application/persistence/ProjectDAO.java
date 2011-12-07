@@ -1,7 +1,6 @@
 package br.gumn.application.persistence;
 
-import java.util.List;
-
+import java.util.Set;
 import br.gumn.application.bean.Project;
 import br.gumn.application.persistence.util.AbstractDAO;
 
@@ -18,9 +17,9 @@ public class ProjectDAO extends AbstractDAO<Project> {
 	 * Projeto de Pesquisa relacionadas a determinado Departamento.
 	 * 
 	 * @param idDepartment Integer
-	 * @return List<Project>
+	 * @return Set<Project>
 	 */
-	public List<Project> selectByDepartment(int idDepartment) {
+	public Set<Project> selectByDepartment(int idDepartment) {
 		return new DepartmentDAO().find(idDepartment).getProjects();
 	}
 
@@ -29,9 +28,9 @@ public class ProjectDAO extends AbstractDAO<Project> {
 	 * Projeto de Pesquisa relacionadas a determinada Publicação.
 	 * 
 	 * @param idPublication Integer
-	 * @return List<Project>
+	 * @return Set<Project>
 	 */
-	public List<Project> selectByPublication(int idPublication) {
+	public Set<Project> selectByPublication(int idPublication) {
 		return new PublicationDAO().find(idPublication).getProjects();
 	}
 
@@ -40,9 +39,9 @@ public class ProjectDAO extends AbstractDAO<Project> {
 	 * Projeto de Pesquisa relacionadas a determinado Pesquisador.
 	 * 
 	 * @param cpfResearcher String
-	 * @return List<Project>
+	 * @return Set<Project>
 	 */
-	public List<Project> selectByMember(String cpfResearcher) {
+	public Set<Project> selectByMember(String cpfResearcher) {
 		return new ResearcherDAO().find(cpfResearcher).getProjects();
 	}
 
@@ -51,9 +50,9 @@ public class ProjectDAO extends AbstractDAO<Project> {
 	 * Projeto de Pesquisa relacionadas a determinada Linha de Pesquisa.
 	 * 
 	 * @param idResearchLine Integer
-	 * @return List<Project>
+	 * @return Set<Project>
 	 */
-	public List<Project> selectByResearchLine(int idResearchLine) {
+	public Set<Project> selectByResearchLine(int idResearchLine) {
 		return new ResearchLineDAO().find(idResearchLine).getProjects();
 	}
 
@@ -62,9 +61,9 @@ public class ProjectDAO extends AbstractDAO<Project> {
 	 * Projeto de Pesquisa relacionadas a determinado Grupo/Time de Pesquisa.
 	 * 
 	 * @param idTeam Integer
-	 * @return List<Project>
+	 * @return Set<Project>
 	 */
-	public List<Project> selectByTeam(int idTeam) {
+	public Set<Project> selectByTeam(int idTeam) {
 		return new TeamDAO().find(idTeam).getProjects();
 	}
 }

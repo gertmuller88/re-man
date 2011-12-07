@@ -1,7 +1,6 @@
 package br.gumn.application.persistence;
 
-import java.util.List;
-
+import java.util.Set;
 import br.gumn.application.bean.Team;
 import br.gumn.application.persistence.util.AbstractDAO;
 
@@ -18,9 +17,9 @@ public class TeamDAO extends AbstractDAO<Team> {
 	 * Grupo/Time de Pesquisa relacionadas a determinado Departamento.
 	 * 
 	 * @param idDepartment Integer
-	 * @return List<Team>
+	 * @return Set<Team>
 	 */
-	public List<Team> selectByDepartment(int idDepartment) {
+	public Set<Team> selectByDepartment(int idDepartment) {
 		return new DepartmentDAO().find(idDepartment).getTeams();
 	}
 
@@ -29,9 +28,9 @@ public class TeamDAO extends AbstractDAO<Team> {
 	 * Grupo/Time de Pesquisa relacionadas a determinado Projeto de Pesquisa.
 	 * 
 	 * @param idProject Integer
-	 * @return List<Team>
+	 * @return Set<Team>
 	 */
-	public List<Team> selectByProject(int idProject) {
+	public Set<Team> selectByProject(int idProject) {
 		return new ProjectDAO().find(idProject).getTeams();
 	}
 
@@ -40,9 +39,9 @@ public class TeamDAO extends AbstractDAO<Team> {
 	 * Grupo/Time de Pesquisa relacionadas a determinada Publicação.
 	 * 
 	 * @param idPublication Integer
-	 * @return List<Team>
+	 * @return Set<Team>
 	 */
-	public List<Team> selectByPublication(int idPublication) {
+	public Set<Team> selectByPublication(int idPublication) {
 		return new PublicationDAO().find(idPublication).getTeams();
 	}
 
@@ -51,9 +50,9 @@ public class TeamDAO extends AbstractDAO<Team> {
 	 * Grupo/Time de Pesquisa relacionadas a determinado Pesquisador.
 	 * 
 	 * @param cpfResearcher String
-	 * @return List<Team>
+	 * @return Set<Team>
 	 */
-	public List<Team> selectByMember(String cpfResearcher) {
+	public Set<Team> selectByMember(String cpfResearcher) {
 		return new ResearcherDAO().find(cpfResearcher).getTeams();
 	}
 
@@ -62,9 +61,9 @@ public class TeamDAO extends AbstractDAO<Team> {
 	 * Grupo/Time de Pesquisa relacionadas a determinada Linha de Pesquisa.
 	 * 
 	 * @param idResearchLine Integer
-	 * @return List<Team>
+	 * @return Set<Team>
 	 */
-	public List<Team> selectByResearchLine(int idResearchLine) {
+	public Set<Team> selectByResearchLine(int idResearchLine) {
 		return new ResearchLineDAO().find(idResearchLine).getTeams();
 	}
 }

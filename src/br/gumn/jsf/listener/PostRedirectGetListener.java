@@ -20,6 +20,13 @@ import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * PhaseListener responsável pelo controle de Requisições.
+ * Implementa o padrão PostRedirectGet.
+ * 
+ * @author Gert Uchôa Müller Neto
+ * @version v2.08112011.2240
+ */
 public class PostRedirectGetListener implements PhaseListener {
 	private static final String PRG_DONE_ID = "PostRedirectGetListener.postRedirectGetDone";
 	private static final String SAVED_VIEW_ROOT_ID = "PostRedirectGetListener.savedViewRoot";

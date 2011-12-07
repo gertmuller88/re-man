@@ -1,7 +1,6 @@
 package br.gumn.application.persistence;
 
-import java.util.List;
-
+import java.util.Set;
 import br.gumn.application.bean.ResearchLine;
 import br.gumn.application.persistence.util.AbstractDAO;
 
@@ -18,9 +17,9 @@ public class ResearchLineDAO extends AbstractDAO<ResearchLine> {
 	 * Linha de Pesquisa relacionadas a determinado Projeto de Pesquisa.
 	 * 
 	 * @param idProject Integer
-	 * @return List<ResearchLine>
+	 * @return Set<ResearchLine>
 	 */
-	public List<ResearchLine> selectByProject(int idProject) {
+	public Set<ResearchLine> selectByProject(int idProject) {
 		return new ProjectDAO().find(idProject).getResearchLines();
 	}
 
@@ -29,9 +28,9 @@ public class ResearchLineDAO extends AbstractDAO<ResearchLine> {
 	 * Linha de Pesquisa relacionadas a determinada Publicação.
 	 * 
 	 * @param idPublication Integer
-	 * @return List<ResearchLine>
+	 * @return Set<ResearchLine>
 	 */
-	public List<ResearchLine> selectByPublication(int idPublication) {
+	public Set<ResearchLine> selectByPublication(int idPublication) {
 		return new PublicationDAO().find(idPublication).getResearchLines();
 	}
 
@@ -40,9 +39,9 @@ public class ResearchLineDAO extends AbstractDAO<ResearchLine> {
 	 * Linha de Pesquisa relacionadas a determinado Pesquisador.
 	 * 
 	 * @param cpfResearcher String
-	 * @return List<ResearchLine>
+	 * @return Set<ResearchLine>
 	 */
-	public List<ResearchLine> selectByResearcher(String cpfResearcher) {
+	public Set<ResearchLine> selectByResearcher(String cpfResearcher) {
 		return new ResearcherDAO().find(cpfResearcher).getResearchLines();
 	}
 
@@ -51,9 +50,9 @@ public class ResearchLineDAO extends AbstractDAO<ResearchLine> {
 	 * Linha de Pesquisa relacionadas a determinado Grupo/Time de Pesquisa.
 	 * 
 	 * @param idTeam Integer
-	 * @return List<ResearchLine>
+	 * @return Set<ResearchLine>
 	 */
-	public List<ResearchLine> selectByTeam(int idTeam) {
+	public Set<ResearchLine> selectByTeam(int idTeam) {
 		return new TeamDAO().find(idTeam).getResearchLines();
 	}
 }

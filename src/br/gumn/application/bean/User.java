@@ -5,7 +5,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 import br.gumn.application.bean.enumeration.UserLevel;
 
 /**

@@ -1,7 +1,7 @@
 package br.gumn.application.bean;
 
 import java.io.File;
-import java.util.List;
+import java.util.Set;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 /**
@@ -36,22 +37,27 @@ public class Team {
 	@ElementCollection
 	@CollectionTable(name = "Team_Activities", joinColumns = @JoinColumn(name = "id_Team"))
 	@Column(name = "Activity")
-	private List<String> activities;
+	private Set<String> activities;
 
 	@ManyToMany(mappedBy = "teams")
-	private List<Department> departments;
+	@OrderBy("name")
+	private Set<Department> departments;
 
 	@ManyToMany(mappedBy = "teams")
-	private List<Project> projects;
+	@OrderBy("name")
+	private Set<Project> projects;
 
 	@ManyToMany(mappedBy = "teams")
-	private List<Publication> publications;
+	@OrderBy("date")
+	private Set<Publication> publications;
 
 	@ManyToMany(mappedBy = "teams")
-	private List<Researcher> members;
+	@OrderBy("name")
+	private Set<Researcher> members;
 
 	@ManyToMany(mappedBy = "teams")
-	private List<ResearchLine> researchLines;
+	@OrderBy("title")
+	private Set<ResearchLine> researchLines;
 
 	/**
 	 * @return Integer
@@ -110,86 +116,86 @@ public class Team {
 	}
 
 	/**
-	 * @return List<String>
+	 * @return Set<String>
 	 */
-	public List<String> getActivities() {
+	public Set<String> getActivities() {
 		return activities;
 	}
 
 	/**
-	 * @param activities List<String>
+	 * @param activities Set<String>
 	 */
-	public void setActivities(List<String> activities) {
+	public void setActivities(Set<String> activities) {
 		this.activities = activities;
 	}
 
 	/**
-	 * @return List<Department>
+	 * @return Set<Department>
 	 */
-	public List<Department> getDepartments() {
+	public Set<Department> getDepartments() {
 		return departments;
 	}
 
 	/**
-	 * @param departments List<Department>
+	 * @param departments Set<Department>
 	 */
-	public void setDepartments(List<Department> departments) {
+	public void setDepartments(Set<Department> departments) {
 		this.departments = departments;
 	}
 
 	/**
-	 * @return List<Project>
+	 * @return Set<Project>
 	 */
-	public List<Project> getProjects() {
+	public Set<Project> getProjects() {
 		return projects;
 	}
 
 	/**
-	 * @param projects List<Project>
+	 * @param projects Set<Project>
 	 */
-	public void setProjects(List<Project> projects) {
+	public void setProjects(Set<Project> projects) {
 		this.projects = projects;
 	}
 
 	/**
-	 * @return List<Publication>
+	 * @return Set<Publication>
 	 */
-	public List<Publication> getPublications() {
+	public Set<Publication> getPublications() {
 		return publications;
 	}
 
 	/**
-	 * @param publications List<Publication>
+	 * @param publications Set<Publication>
 	 */
-	public void setPublications(List<Publication> publications) {
+	public void setPublications(Set<Publication> publications) {
 		this.publications = publications;
 	}
 
 	/**
-	 * @return List<Researcher>
+	 * @return Set<Researcher>
 	 */
-	public List<Researcher> getMembers() {
+	public Set<Researcher> getMembers() {
 		return members;
 	}
 
 	/**
-	 * @param members List<Researcher>
+	 * @param members Set<Researcher>
 	 */
-	public void setMembers(List<Researcher> members) {
+	public void setMembers(Set<Researcher> members) {
 		this.members = members;
 	}
 
 	/**
-	 * @return List<ResearchLine>
+	 * @return Set<ResearchLine>
 	 */
-	public List<ResearchLine> getResearchLines() {
+	public Set<ResearchLine> getResearchLines() {
 		return researchLines;
 	}
 
 	/**
-	 * @param researchLines List<ResearchLine>
+	 * @param researchLines Set<ResearchLine>
 	 */
-	public void setResearchLines(List<ResearchLine> researchLines) {
+	public void setResearchLines(Set<ResearchLine> researchLines) {
 		this.researchLines = researchLines;
 	}
 }

@@ -1,11 +1,12 @@
 package br.gumn.application.bean;
 
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 /**
@@ -27,7 +28,8 @@ public class University {
 	private String name;
 
 	@OneToMany(mappedBy = "university")
-	private List<Department> departments;
+	@OrderBy("name")
+	private Set<Department> departments;
 
 	/**
 	 * @return Integer
@@ -72,16 +74,16 @@ public class University {
 	}
 
 	/**
-	 * @return List<Department>
+	 * @return Set<Department>
 	 */
-	public List<Department> getDepartments() {
+	public Set<Department> getDepartments() {
 		return departments;
 	}
 
 	/**
-	 * @param departments List<Department>
+	 * @param departments Set<Department>
 	 */
-	public void setDepartments(List<Department> departments) {
+	public void setDepartments(Set<Department> departments) {
 		this.departments = departments;
 	}
 }
