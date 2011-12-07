@@ -1,7 +1,6 @@
 package br.gumn.application.persistence;
 
-import java.util.List;
-
+import java.util.Set;
 import br.gumn.application.bean.Researcher;
 import br.gumn.application.persistence.util.AbstractDAO;
 
@@ -18,9 +17,9 @@ public class ResearcherDAO extends AbstractDAO<Researcher> {
 	 * Pesquisador relacionadas a determinado Departamento.
 	 * 
 	 * @param idDepartment Integer
-	 * @return List<Researcher>
+	 * @return Set<Researcher>
 	 */
-	public List<Researcher> selectByDepartment(int idDepartment) {
+	public Set<Researcher> selectByDepartment(int idDepartment) {
 		return new DepartmentDAO().find(idDepartment).getMembers();
 	}
 
@@ -29,9 +28,9 @@ public class ResearcherDAO extends AbstractDAO<Researcher> {
 	 * Pesquisador relacionadas a determinado Projeto de Pesquisa.
 	 * 
 	 * @param idProject Integer
-	 * @return List<Researcher>
+	 * @return Set<Researcher>
 	 */
-	public List<Researcher> selectByProject(int idProject) {
+	public Set<Researcher> selectByProject(int idProject) {
 		return new ProjectDAO().find(idProject).getMembers();
 	}
 
@@ -40,9 +39,9 @@ public class ResearcherDAO extends AbstractDAO<Researcher> {
 	 * Pesquisador relacionadas a determinada Publicação.
 	 * 
 	 * @param idPublication Integer
-	 * @return List<Researcher>
+	 * @return Set<Researcher>
 	 */
-	public List<Researcher> selectByPublication(int idPublication) {
+	public Set<Researcher> selectByPublication(int idPublication) {
 		return new PublicationDAO().find(idPublication).getAuthors();
 	}
 
@@ -51,9 +50,9 @@ public class ResearcherDAO extends AbstractDAO<Researcher> {
 	 * Pesquisador relacionadas a determinada Linha de Pesquisa.
 	 * 
 	 * @param idResearchLine Integer
-	 * @return List<Researcher>
+	 * @return Set<Researcher>
 	 */
-	public List<Researcher> selectByResearchLine(int idResearchLine) {
+	public Set<Researcher> selectByResearchLine(int idResearchLine) {
 		return new ResearchLineDAO().find(idResearchLine).getResearchers();
 	}
 
@@ -62,9 +61,9 @@ public class ResearcherDAO extends AbstractDAO<Researcher> {
 	 * Pesquisador relacionadas a determinado Grupo/Time de Pesquisa.
 	 * 
 	 * @param idTeam Integer
-	 * @return List<Researcher>
+	 * @return Set<Researcher>
 	 */
-	public List<Researcher> selectByTeam(int idTeam) {
+	public Set<Researcher> selectByTeam(int idTeam) {
 		return new TeamDAO().find(idTeam).getMembers();
 	}
 

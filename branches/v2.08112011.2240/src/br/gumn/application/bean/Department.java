@@ -1,6 +1,6 @@
 package br.gumn.application.bean;
 
-import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 /**
@@ -42,23 +43,28 @@ public class Department {
 	private Link site;
 
 	@ManyToMany
+	@OrderBy("name")
 	@JoinTable(name = "Department_Project", schema = "reman", joinColumns = @JoinColumn(name = "id_Department"), inverseJoinColumns = @JoinColumn(name = "id_Project"))
-	private List<Project> projects;
+	private Set<Project> projects;
 
 	@ManyToMany
+	@OrderBy("date")
 	@JoinTable(name = "Department_Publication", schema = "reman", joinColumns = @JoinColumn(name = "id_Department"), inverseJoinColumns = @JoinColumn(name = "id_Publication"))
-	private List<Publication> publications;
+	private Set<Publication> publications;
 
 	@ManyToMany
+	@OrderBy("name")
 	@JoinTable(name = "Department_Researcher", schema = "reman", joinColumns = @JoinColumn(name = "id_Department"), inverseJoinColumns = @JoinColumn(name = "id_Researcher"))
-	private List<Researcher> members;
+	private Set<Researcher> members;
 
 	@ManyToMany
+	@OrderBy("name")
 	@JoinTable(name = "Department_Team", schema = "reman", joinColumns = @JoinColumn(name = "id_Department"), inverseJoinColumns = @JoinColumn(name = "id_Team"))
-	private List<Team> teams;
+	private Set<Team> teams;
 
 	@OneToMany(mappedBy = "department")
-	private List<Title> titles;
+	@OrderBy("date")
+	private Set<Title> titles;
 
 	@ManyToOne(optional = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_University", insertable = true, updatable = true)
@@ -135,72 +141,72 @@ public class Department {
 	}
 
 	/**
-	 * @return List<Project>
+	 * @return Set<Project>
 	 */
-	public List<Project> getProjects() {
+	public Set<Project> getProjects() {
 		return projects;
 	}
 
 	/**
-	 * @param projects List<Project>
+	 * @param projects Set<Project>
 	 */
-	public void setProjects(List<Project> projects) {
+	public void setProjects(Set<Project> projects) {
 		this.projects = projects;
 	}
 
 	/**
-	 * @return List<Publication>
+	 * @return Set<Publication>
 	 */
-	public List<Publication> getPublications() {
+	public Set<Publication> getPublications() {
 		return publications;
 	}
 
 	/**
-	 * @param publications List<Publication>
+	 * @param publications Set<Publication>
 	 */
-	public void setPublications(List<Publication> publications) {
+	public void setPublications(Set<Publication> publications) {
 		this.publications = publications;
 	}
 
 	/**
-	 * @return List<Researcher>
+	 * @return Set<Researcher>
 	 */
-	public List<Researcher> getMembers() {
+	public Set<Researcher> getMembers() {
 		return members;
 	}
 
 	/**
-	 * @param members List<Researcher>
+	 * @param members Set<Researcher>
 	 */
-	public void setMembers(List<Researcher> members) {
+	public void setMembers(Set<Researcher> members) {
 		this.members = members;
 	}
 
 	/**
-	 * @return List<Team>
+	 * @return Set<Team>
 	 */
-	public List<Team> getTeams() {
+	public Set<Team> getTeams() {
 		return teams;
 	}
 
 	/**
-	 * @param teams List<Team>
+	 * @param teams Set<Team>
 	 */
-	public void setTeams(List<Team> teams) {
+	public void setTeams(Set<Team> teams) {
 		this.teams = teams;
 	}
 
 	/**
-	 * @return List<title>
+	 * @return Set<title>
 	 */
-	public List<Title> getTitles() {
+	public Set<Title> getTitles() {
 		return titles;
 	}
 
 	/**
-	 * @param titles List<title>
+	 * @param titles Set<title>
 	 */
-	public void setTitles(List<Title> titles) {
+	public void setTitles(Set<Title> titles) {
 		this.titles = titles;
 	}
 

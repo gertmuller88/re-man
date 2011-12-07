@@ -1,6 +1,6 @@
 package br.gumn.application.bean;
 
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 /**
@@ -31,17 +32,21 @@ public class ResearchLine {
 	private String title;
 
 	@ManyToMany(mappedBy = "researchLines")
-	private List<Project> projects;
+	@OrderBy("name")
+	private Set<Project> projects;
 
 	@ManyToMany(mappedBy = "researchLines")
-	private List<Publication> publications;
+	@OrderBy("date")
+	private Set<Publication> publications;
 
 	@ManyToMany(mappedBy = "researchLines")
-	private List<Researcher> researchers;
+	@OrderBy("name")
+	private Set<Researcher> researchers;
 
 	@ManyToMany
+	@OrderBy("name")
 	@JoinTable(name = "ResearchLine_Team", schema = "reman", joinColumns = @JoinColumn(name = "id_ResearchLine"), inverseJoinColumns = @JoinColumn(name = "id_Team"))
-	private List<Team> teams;
+	private Set<Team> teams;
 
 	/**
 	 * @return Integer
@@ -100,58 +105,58 @@ public class ResearchLine {
 	}
 
 	/**
-	 * @return List<Project>
+	 * @return Set<Project>
 	 */
-	public List<Project> getProjects() {
+	public Set<Project> getProjects() {
 		return projects;
 	}
 
 	/**
-	 * @param projects List<Project>
+	 * @param projects Set<Project>
 	 */
-	public void setProjects(List<Project> projects) {
+	public void setProjects(Set<Project> projects) {
 		this.projects = projects;
 	}
 
 	/**
-	 * @return List<Publication>
+	 * @return Set<Publication>
 	 */
-	public List<Publication> getPublications() {
+	public Set<Publication> getPublications() {
 		return publications;
 	}
 
 	/**
-	 * @param publications List<Publication>
+	 * @param publications Set<Publication>
 	 */
-	public void setPublications(List<Publication> publications) {
+	public void setPublications(Set<Publication> publications) {
 		this.publications = publications;
 	}
 
 	/**
-	 * @return List<Researcher>
+	 * @return Set<Researcher>
 	 */
-	public List<Researcher> getResearchers() {
+	public Set<Researcher> getResearchers() {
 		return researchers;
 	}
 
 	/**
-	 * @param researchers List<Researcher>
+	 * @param researchers Set<Researcher>
 	 */
-	public void setResearchers(List<Researcher> researchers) {
+	public void setResearchers(Set<Researcher> researchers) {
 		this.researchers = researchers;
 	}
 
 	/**
-	 * @return List<Team>
+	 * @return Set<Team>
 	 */
-	public List<Team> getTeams() {
+	public Set<Team> getTeams() {
 		return teams;
 	}
 
 	/**
-	 * @param teams List<Team>
+	 * @param teams Set<Team>
 	 */
-	public void setTeams(List<Team> teams) {
+	public void setTeams(Set<Team> teams) {
 		this.teams = teams;
 	}
 }

@@ -19,10 +19,15 @@ import javax.faces.event.PhaseListener;
 import javax.servlet.http.HttpServletResponse;
 import com.ocpsoft.pretty.PrettyContext;
 import com.ocpsoft.pretty.faces.config.mapping.UrlMapping;
-
 import br.gumn.application.bean.User;
 import br.gumn.jsf.bean.LoginManagedBean;
 
+/**
+ * PhaseListener responsável pelo controle de Autenticação.
+ * 
+ * @author Gert Uchôa Müller Neto
+ * @version v2.08112011.2240
+ */
 public class AuthenticationListener implements PhaseListener {
 	private static final String AUTH_DONE_ID = "AuthenticationListener.redirectDone";
 	private static final String ALL_FACES_MESSAGES_ID = "AuthenticationListener.allFacesMessages";

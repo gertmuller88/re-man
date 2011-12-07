@@ -2,7 +2,7 @@ package br.gumn.application.bean;
 
 import java.io.File;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -15,8 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
-
 import br.gumn.application.bean.enumeration.PublicationType;
 
 /**
@@ -61,22 +61,27 @@ public class Publication {
 	private Link doi;
 
 	@ManyToMany(mappedBy = "publications")
-	private List<Department> departments;
+	@OrderBy("name")
+	private Set<Department> departments;
 
 	@ManyToMany(mappedBy = "publications")
-	private List<Project> projects;
+	@OrderBy("name")
+	private Set<Project> projects;
 
 	@ManyToMany
+	@OrderBy("name")
 	@JoinTable(name = "Publication_Researcher", schema = "reman", joinColumns = @JoinColumn(name = "id_Publication"), inverseJoinColumns = @JoinColumn(name = "id_Researcher"))
-	private List<Researcher> authors;
+	private Set<Researcher> authors;
 
 	@ManyToMany
+	@OrderBy("title")
 	@JoinTable(name = "Publication_ResearchLine", schema = "reman", joinColumns = @JoinColumn(name = "id_Publication"), inverseJoinColumns = @JoinColumn(name = "id_ResearchLine"))
-	private List<ResearchLine> researchLines;
+	private Set<ResearchLine> researchLines;
 
 	@ManyToMany
+	@OrderBy("name")
 	@JoinTable(name = "Publication_Team", schema = "reman", joinColumns = @JoinColumn(name = "id_Publication"), inverseJoinColumns = @JoinColumn(name = "id_Team"))
-	private List<Team> teams;
+	private Set<Team> teams;
 
 	/**
 	 * @return Integer
@@ -247,72 +252,72 @@ public class Publication {
 	}
 
 	/**
-	 * @return List<Department>
+	 * @return Set<Department>
 	 */
-	public List<Department> getDepartments() {
+	public Set<Department> getDepartments() {
 		return departments;
 	}
 
 	/**
-	 * @param departments List<Department>
+	 * @param departments Set<Department>
 	 */
-	public void setDepartments(List<Department> departments) {
+	public void setDepartments(Set<Department> departments) {
 		this.departments = departments;
 	}
 
 	/**
-	 * @return List<Project>
+	 * @return Set<Project>
 	 */
-	public List<Project> getProjects() {
+	public Set<Project> getProjects() {
 		return projects;
 	}
 
 	/**
-	 * @param projects List<Project>
+	 * @param projects Set<Project>
 	 */
-	public void setProjects(List<Project> projects) {
+	public void setProjects(Set<Project> projects) {
 		this.projects = projects;
 	}
 
 	/**
-	 * @return List<Researcher>
+	 * @return Set<Researcher>
 	 */
-	public List<Researcher> getAuthors() {
+	public Set<Researcher> getAuthors() {
 		return authors;
 	}
 
 	/**
-	 * @param authors List<Researcher>
+	 * @param authors Set<Researcher>
 	 */
-	public void setAuthors(List<Researcher> authors) {
+	public void setAuthors(Set<Researcher> authors) {
 		this.authors = authors;
 	}
 
 	/**
-	 * @return List<ResearchLine>
+	 * @return Set<ResearchLine>
 	 */
-	public List<ResearchLine> getResearchLines() {
+	public Set<ResearchLine> getResearchLines() {
 		return researchLines;
 	}
 
 	/**
-	 * @param researchLines List<ResearchLine>
+	 * @param researchLines Set<ResearchLine>
 	 */
-	public void setResearchLines(List<ResearchLine> researchLines) {
+	public void setResearchLines(Set<ResearchLine> researchLines) {
 		this.researchLines = researchLines;
 	}
 
 	/**
-	 * @return List<Team>
+	 * @return Set<Team>
 	 */
-	public List<Team> getTeams() {
+	public Set<Team> getTeams() {
 		return teams;
 	}
 
 	/**
-	 * @param teams List<Team>
+	 * @param teams Set<Team>
 	 */
-	public void setTeams(List<Team> teams) {
+	public void setTeams(Set<Team> teams) {
 		this.teams = teams;
 	}
 }

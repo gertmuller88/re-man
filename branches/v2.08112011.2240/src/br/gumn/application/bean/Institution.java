@@ -1,11 +1,12 @@
 package br.gumn.application.bean;
 
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 /**
@@ -27,7 +28,8 @@ public class Institution {
 	private String name;
 
 	@OneToMany(mappedBy = "institution")
-	private List<Association> associations;
+	@OrderBy("date")
+	private Set<Association> associations;
 
 	/**
 	 * @return Integer
@@ -72,16 +74,16 @@ public class Institution {
 	}
 
 	/**
-	 * @return List<Association>
+	 * @return Set<Association>
 	 */
-	public List<Association> getAssociations() {
+	public Set<Association> getAssociations() {
 		return associations;
 	}
 
 	/**
-	 * @param associations List<Association>
+	 * @param associations Set<Association>
 	 */
-	public void setAssociations(List<Association> associations) {
+	public void setAssociations(Set<Association> associations) {
 		this.associations = associations;
 	}
 }
