@@ -1,4 +1,4 @@
-package br.ufpe.cin.gumn.application.persistence.util;
+package br.gumn.application.persistence.util;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
