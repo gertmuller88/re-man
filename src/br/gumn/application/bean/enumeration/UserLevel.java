@@ -1,4 +1,4 @@
-package br.ufpe.cin.gumn.application.bean.enumeration;
+package br.gumn.application.bean.enumeration;
 
 /**
  * Enum responsável por nomear os tipos de usuários do sistema.

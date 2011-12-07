@@ -1,4 +1,4 @@
-package br.ufpe.cin.gumn.application.bean.enumeration;
+package br.gumn.application.bean.enumeration;
 
 /**
  * Enum responsável por listar os tipos de pesquisadores.
