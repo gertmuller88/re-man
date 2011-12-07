@@ -1,34 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
-                                 http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
              version="1.0">
 
-	<persistence-unit name="reman">
+	<persistence-unit name="re-man">
 
 		<!-- JPA Provider -->
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 
 		<!-- Entities -->
-		<class>br.ufpe.cin.gumn.application.bean.Address</class>
-		<class>br.ufpe.cin.gumn.application.bean.Association</class>
-		<class>br.ufpe.cin.gumn.application.bean.Department</class>
-		<class>br.ufpe.cin.gumn.application.bean.Institution</class>
-		<class>br.ufpe.cin.gumn.application.bean.Link</class>
-		<class>br.ufpe.cin.gumn.application.bean.Project</class>
-		<class>br.ufpe.cin.gumn.application.bean.Publication</class>
-		<class>br.ufpe.cin.gumn.application.bean.Researcher</class>
-		<class>br.ufpe.cin.gumn.application.bean.ResearchLine</class>
-		<class>br.ufpe.cin.gumn.application.bean.Team</class>
-		<class>br.ufpe.cin.gumn.application.bean.Title</class>
-		<class>br.ufpe.cin.gumn.application.bean.University</class>
-		<class>br.ufpe.cin.gumn.application.bean.User</class>
+		<class>br.gumn.application.bean.Address</class>
+		<class>br.gumn.application.bean.Association</class>
+		<class>br.gumn.application.bean.Department</class>
+		<class>br.gumn.application.bean.Institution</class>
+		<class>br.gumn.application.bean.Link</class>
+		<class>br.gumn.application.bean.Project</class>
+		<class>br.gumn.application.bean.Publication</class>
+		<class>br.gumn.application.bean.Researcher</class>
+		<class>br.gumn.application.bean.ResearchLine</class>
+		<class>br.gumn.application.bean.Team</class>
+		<class>br.gumn.application.bean.Title</class>
+		<class>br.gumn.application.bean.University</class>
+		<class>br.gumn.application.bean.User</class>
 
 		<!-- Database Connection Properties -->
 		<properties>
 			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
-			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/reman"/>
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/re-man"/>
 			<property name="hibernate.connection.username" value="root"/>
 			<property name="hibernate.connection.password" value="root"/>
 			<property name="hibernate.show_sql" value="true"/>

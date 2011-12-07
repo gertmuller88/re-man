@@ -6,13 +6,13 @@
 
 	<managed-bean>
 		<managed-bean-name>loginManagedBean</managed-bean-name>
-		<managed-bean-class>br.ufpe.cin.gumn.model2.bean.LoginManagedBean</managed-bean-class>
+		<managed-bean-class>br.gumn.jsf.bean.LoginManagedBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	
 	<lifecycle>
-		<phase-listener>br.ufpe.cin.gumn.model2.listener.PostRedirectGetListener</phase-listener>
-		<phase-listener>br.ufpe.cin.gumn.model2.listener.AuthenticationListener</phase-listener>
+		<phase-listener>br.gumn.jsf.listener.PostRedirectGetListener</phase-listener>
+		<phase-listener>br.gumn.jsf.listener.AuthenticationListener</phase-listener>
 		<phase-listener>com.ocpsoft.pretty.faces.event.MultiPageMessagesSupport</phase-listener>
 	</lifecycle>
 	
