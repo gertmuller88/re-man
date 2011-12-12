@@ -29,8 +29,7 @@ public class PersistenceFactory {
 	}
 
 	/**
-	 * Método estático responsável por fechar a instância privada de
-	 * EntityManager.
+	 * Método estático responsável por fechar a instância privada de EntityManager.
 	 * 
 	 * @return Boolean
 	 */
