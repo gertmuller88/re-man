@@ -18,8 +18,9 @@ public class DepartmentDAO extends AbstractDAO<Department> {
 	 * 
 	 * @param idProject Integer
 	 * @return Set<Department>
+	 * @throws IllegalArgumentException
 	 */
-	public Set<Department> selectByProject(int idProject) {
+	public Set<Department> selectByProject(int idProject) throws IllegalArgumentException {
 		return new ProjectDAO().find(idProject).getDepartments();
 	}
 
@@ -29,8 +30,9 @@ public class DepartmentDAO extends AbstractDAO<Department> {
 	 * 
 	 * @param idPublication Integer
 	 * @return Set<Department>
+	 * @throws IllegalArgumentException
 	 */
-	public Set<Department> selectByPublication(int idPublication) {
+	public Set<Department> selectByPublication(int idPublication) throws IllegalArgumentException {
 		return new PublicationDAO().find(idPublication).getDepartments();
 	}
 
@@ -40,8 +42,9 @@ public class DepartmentDAO extends AbstractDAO<Department> {
 	 * 
 	 * @param cpfResearcher String
 	 * @return Set<Department>
+	 * @throws IllegalArgumentException
 	 */
-	public Set<Department> selectByMember(String cpfResearcher) {
+	public Set<Department> selectByMember(String cpfResearcher) throws IllegalArgumentException {
 		return new ResearcherDAO().find(cpfResearcher).getDepartments();
 	}
 
@@ -51,8 +54,9 @@ public class DepartmentDAO extends AbstractDAO<Department> {
 	 * 
 	 * @param idTeam Integer
 	 * @return Set<Department>
+	 * @throws IllegalArgumentException
 	 */
-	public Set<Department> selectByTeam(int idTeam) {
+	public Set<Department> selectByTeam(int idTeam) throws IllegalArgumentException {
 		return new TeamDAO().find(idTeam).getDepartments();
 	}
 
@@ -62,8 +66,9 @@ public class DepartmentDAO extends AbstractDAO<Department> {
 	 * 
 	 * @param idUniversity Integer
 	 * @return Set<Department>
+	 * @throws IllegalArgumentException
 	 */
-	public Set<Department> selectByUniversity(int idUniversity) {
+	public Set<Department> selectByUniversity(int idUniversity) throws IllegalArgumentException {
 		return new UniversityDAO().find(idUniversity).getDepartments();
 	}
 }
