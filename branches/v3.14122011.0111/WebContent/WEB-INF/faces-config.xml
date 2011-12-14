@@ -31,7 +31,7 @@
 	<!-- APPLICATION CONFIGS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 	<application>
 		<resource-bundle>
-			<base-name>br.gumn.jsf.messages.messages</base-name>
+			<base-name>br.gumn.jsf.message.messages</base-name>
 			<var>messages</var>
 		</resource-bundle>
 
