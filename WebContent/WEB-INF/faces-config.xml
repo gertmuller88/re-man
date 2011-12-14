@@ -1,9 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+			  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+			  version="2.0">
 
-<faces-config
-    xmlns="http://java.sun.com/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
-    version="2.0">
+	<!-- MANAGED BEANS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<managed-bean>
+		<managed-bean-name>loginManagedBean</managed-bean-name>
+		<managed-bean-class>br.gumn.jsf.bean.LoginManagedBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 
+	<managed-bean>
+		<managed-bean-name>localeManagedBean</managed-bean-name>
+		<managed-bean-class>br.gumn.jsf.bean.LocaleManagedBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+
+	<!-- PHASE LISTENERS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<lifecycle>
+		<phase-listener>br.gumn.jsf.listener.PostRedirectGetListener</phase-listener>
+		<phase-listener>br.gumn.jsf.listener.AuthenticationListener</phase-listener>
+		<phase-listener>com.ocpsoft.pretty.faces.event.MultiPageMessagesSupport</phase-listener>
+	</lifecycle>
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+
+	<!-- APPLICATION CONFIGS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<application>
+		<resource-bundle>
+			<base-name>br.gumn.jsf.messages.messages</base-name>
+			<var>messages</var>
+		</resource-bundle>
+
+		<locale-config>
+			<default-locale>pt_BR</default-locale>
+			<supported-locale>en_US</supported-locale>
+		</locale-config>
+
+		<message-bundle>br.gumn.jsf.message.messages</message-bundle>
+	</application>
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	
 </faces-config>
