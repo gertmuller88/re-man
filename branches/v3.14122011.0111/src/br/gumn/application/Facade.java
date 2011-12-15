@@ -80,4 +80,15 @@ public class Facade {
 	public boolean checkUser(User user) throws IllegalArgumentException {
 		return new UserController().check(user);
 	}
+	
+	/**
+	 * Método responsável pela busca de uma instância da entidade Usuário pela chave-primária.
+	 * 
+	 * @param login String
+	 * @return T
+	 * @throws IllegalArgumentException
+	 */
+	public User findUser(String login) throws IllegalArgumentException {
+		return new UserController().find(login);
+	}
 }

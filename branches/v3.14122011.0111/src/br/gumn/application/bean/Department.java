@@ -34,39 +34,39 @@ public class Department {
 
 	private String name;
 
-	@OneToOne(optional = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(optional = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_Address", insertable = true, updatable = true)
 	private Address address;
 
-	@OneToOne(optional = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(optional = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_Link", insertable = true, updatable = true)
 	private Link site;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("name")
 	@JoinTable(name = "Department_Project", schema = "reman", joinColumns = @JoinColumn(name = "id_Department"), inverseJoinColumns = @JoinColumn(name = "id_Project"))
 	private Set<Project> projects;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("date")
 	@JoinTable(name = "Department_Publication", schema = "reman", joinColumns = @JoinColumn(name = "id_Department"), inverseJoinColumns = @JoinColumn(name = "id_Publication"))
 	private Set<Publication> publications;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("name")
 	@JoinTable(name = "Department_Researcher", schema = "reman", joinColumns = @JoinColumn(name = "id_Department"), inverseJoinColumns = @JoinColumn(name = "id_Researcher"))
 	private Set<Researcher> members;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("name")
 	@JoinTable(name = "Department_Team", schema = "reman", joinColumns = @JoinColumn(name = "id_Department"), inverseJoinColumns = @JoinColumn(name = "id_Team"))
 	private Set<Team> teams;
 
-	@OneToMany(mappedBy = "department")
+	@OneToMany(mappedBy = "department", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("date")
 	private Set<Title> titles;
 
-	@ManyToOne(optional = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(optional = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_University", insertable = true, updatable = true)
 	private University university;
 

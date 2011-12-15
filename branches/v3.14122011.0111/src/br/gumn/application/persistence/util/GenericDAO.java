@@ -84,7 +84,6 @@ public abstract class GenericDAO<T> {
 			em.getTransaction().rollback();
 			throw e;
 		} finally {
-			em.getTransaction().rollback();
 			em.close();
 		}
 	}
@@ -112,7 +111,6 @@ public abstract class GenericDAO<T> {
 			em.getTransaction().rollback();
 			throw e;
 		} finally {
-			em.getTransaction().rollback();
 			em.close();
 		}
 	}

@@ -1,7 +1,9 @@
 package br.gumn.application.bean;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -25,7 +27,7 @@ public class User {
 	@Enumerated
 	private UserLevel userLevel;
 
-	@OneToOne(mappedBy = "user")
+	@OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Researcher researcher;
 
 	/**

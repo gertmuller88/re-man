@@ -10,58 +10,61 @@
 	<meta name="apple-mobile-web-app-capable" content="yes"/>
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 
-	<link rel="apple-touch-icon" href="faces/images/iOS_icon.png"/>
-	<link rel="apple-touch-startup-image" href="faces/images/iOS_startup.png"/>
-	<link rel="stylesheet" type="text/css" href="faces/css/all.css" media="screen"/>
-	<link rel="stylesheet" type="text/css" href="faces/css/theme/switcher.css" media="screen"/>
-	<link rel="stylesheet" type="text/css" href="faces/css/layout_fixed.css" media="screen"/>
-	<link rel="stylesheet" type="text/css" href="faces/css/theme/switcher.css" media="screen"/>
-	<link rel="stylesheet" type="text/css" href="faces/css/theme/theme_base.css" media="screen"/>
-	<link rel="stylesheet" type="text/css" href="faces/css/theme/bg_dark_wood.css" media="screen"/>
+	<link rel="apple-touch-icon" href="#{request.contextPath}/faces/images/iOS_icon.png"/>
+	<link rel="apple-touch-startup-image" href="#{request.contextPath}/faces/images/iOS_startup.png"/>
+	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/faces/css/all.css" media="screen"/>
+	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/faces/css/theme/switcher.css" media="screen"/>
+	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/faces/css/layout_fixed.css" media="screen"/>
+	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/faces/css/theme/switcher.css" media="screen"/>
+	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/faces/css/theme/theme_base.css" media="screen"/>
+	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/faces/css/theme/bg_dark_wood.css" media="screen"/>
 
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-	<script src="faces/js/plugins.js"></script>
-	<script type="text/javascript" src="faces/js/fancybox/jquery.fancybox-1.3.4.js"></script>
-	<script type="text/javascript" src="faces/js/quicksand/jquery.quicksand.js"></script>
-	<script type="text/javascript" src="faces/js/quicksand/custom_sorter.js"></script>
-	<script type="text/javascript" src="faces/js/quicksand/dash_sorter.js"></script>
-	<script type="text/javascript" src="faces/js/quicksand/jquery-css-transform.js"></script>
-	<script type="text/javascript" src="faces/js/quicksand/jquery-animate-css-rotate-scale.js"></script>
-	<script type="text/javascript" src="faces/js/tinyeditor/tinyeditor.js"></script>
-	<script type="text/javascript" src="faces/js/jqueryFileTree/jqueryFileTree.js"></script>
-	<script type="text/javascript" src="faces/js/DataTables/jquery.dataTables.js"></script>
-	<script type="text/javascript" src="faces/js/slidernav/slidernav.js"></script>
-	<script type="text/javascript" src="faces/js/adminica/adminica_ui.js"></script>
+	<script type="text/javascript" src="#{request.contextPath}/faces/js/plugins.js"></script>
+	<script type="text/javascript" src="#{request.contextPath}/faces/js/main.js"></script>
+	<script type="text/javascript" src="#{request.contextPath}/faces/js/fancybox/jquery.fancybox-1.3.4.js"></script>
+	<script type="text/javascript" src="#{request.contextPath}/faces/js/quicksand/jquery.quicksand.js"></script>
+	<script type="text/javascript" src="#{request.contextPath}/faces/js/quicksand/custom_sorter.js"></script>
+	<script type="text/javascript" src="#{request.contextPath}/faces/js/quicksand/dash_sorter.js"></script>
+	<script type="text/javascript" src="#{request.contextPath}/faces/js/quicksand/jquery-css-transform.js"></script>
+	<script type="text/javascript" src="#{request.contextPath}/faces/js/quicksand/jquery-animate-css-rotate-scale.js"></script>
+	<script type="text/javascript" src="#{request.contextPath}/faces/js/tinyeditor/tinyeditor.js"></script>
+	<script type="text/javascript" src="#{request.contextPath}/faces/js/jqueryFileTree/jqueryFileTree.js"></script>
+	<script type="text/javascript" src="#{request.contextPath}/faces/js/DataTables/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="#{request.contextPath}/faces/js/slidernav/slidernav.js"></script>
+	<script type="text/javascript" src="#{request.contextPath}/faces/js/adminica/adminica_ui.js"></script>
 
-	<title><h:outputText value="#{messages.systemtitle}"/></title>
+	<title><h:outputText value="#{messages.appSystemTitle}"/></title>
 </head>
 
 <body>
 	<h:form id="loginForm">
 		<div id="login_box" class="round_all clearfix">
 			<label class="fields">
-				<strong>Username</strong>
-				<h:inputText id="login" value="#{loginManagedBean.login}" class="indent round_all"/>
+				<strong><h:outputText value="#{messages.loginUsername}"/></strong>
+				<h:inputText id="login" required="true" requiredMessage="#{messages.loginRequiredMessage}" value="#{loginManagedBean.login}" class="indent round_all" onfocus="ocultar(document.getElementById('loginForm:loginSpan'));" onblur="exibir(document.getElementById('loginForm:loginSpan'), this);"/>
+				<h:message id="loginSpan" for="login" errorClass="LV_validation_message LV_invalid"/>
 			</label>
 
 			<label class="fields">
-				<strong>Password</strong>
-				<h:inputSecret id="password" value="#{loginManagedBean.password}" class="indent round_all"/>
+				<strong><h:outputText value="#{messages.loginPassword}"/></strong>
+				<h:inputSecret id="password" required="true" requiredMessage="#{messages.loginPasswordRequiredMessage}" value="#{loginManagedBean.password}" class="indent round_all" onfocus="ocultar(document.getElementById('loginForm:passwordSpan'));" onblur="exibir(document.getElementById('loginForm:passwordSpan'), this);"/>
+				<h:message id="passwordSpan" for="password" errorClass="LV_validation_message LV_invalid"/>
 			</label>
 
 			<h:commandLink action="#{loginManagedBean.logIn}">
 				<button class="button_colour round_all">
-					&nbsp;<img width="24" height="24" alt="Locked 2" src="faces/images/icons/small/white/Locked%202.png"/>
-					<span>Entrar</span>&nbsp;
+					<img width="24" height="24" alt="Locked 2" src="faces/images/icons/small/white/Locked%202.png"/>
+					<span><h:outputText value="#{messages.loginButton}"/></span>
 				</button>
 			</h:commandLink>
 
 			<div id="bar" class="round_bottom">
-				<h:messages/>
+				<h:messages globalOnly="true"/>
 			</div>		
 
-			<a href="login" id="login_logo"><span>Re-Man [Research Management System]</span></a>
+			<a href="login" id="login_logo"><span><h:outputText value="#{messages.appSystemTitle}"/></span></a>
 		</div>
 	</h:form>
 </body>

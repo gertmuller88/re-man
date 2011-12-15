@@ -55,7 +55,7 @@ public class UserController {
 	/**
 	 * Método responsável pela busca de uma instância da entidade Usuário pela chave-primária.
 	 * 
-	 * @param login Integer
+	 * @param login String
 	 * @return T
 	 * @throws IllegalArgumentException
 	 */

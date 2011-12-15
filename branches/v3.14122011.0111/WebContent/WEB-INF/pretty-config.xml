@@ -9,19 +9,44 @@
 
 
 	<!-- MAPPINGS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<url-mapping id="index">
+		<pattern value="/"/>
+		<view-id value="/faces/index.jsf"/>
+	</url-mapping>
+	
 	<url-mapping id="home"> 
 		<pattern value="/home"/> 
 		<view-id value="/faces/home.jsf"/>
-	</url-mapping> 
+	</url-mapping>
 
 	<url-mapping id="login"> 
 		<pattern value="/login"/> 
 		<view-id value="/faces/login.jsf"/>
-	</url-mapping> 
+	</url-mapping>
 	
-	<url-mapping id="index">
-		<pattern value="/"/>
-		<view-id value="/faces/index.jsf"/>
+	<url-mapping id="detailsResearcher">
+		<pattern value="/researcher/"/>
+		<view-id value="/faces/researcher/details.jsf"/>
+	</url-mapping>
+	
+	<url-mapping id="editResearcher">
+		<pattern value="/researcher/?/edit"/>
+		<view-id value="/faces/researcher/edit.jsf"/>
+	</url-mapping>
+	
+	<url-mapping id="newResearcher">
+		<pattern value="/researcher/new"/>
+		<view-id value="/faces/researcher/new.jsf"/>
+	</url-mapping>
+	
+	<url-mapping id="resultsResearcher">
+		<pattern value="/researcher/results"/>
+		<view-id value="/faces/researcher/results.jsf"/>
+	</url-mapping>
+	
+	<url-mapping id="searchResearcher">
+		<pattern value="/researcher/search"/>
+		<view-id value="/faces/researcher/search.jsf"/>
 	</url-mapping>
 	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
 

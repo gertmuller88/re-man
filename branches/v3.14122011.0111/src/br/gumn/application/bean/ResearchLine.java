@@ -1,7 +1,9 @@
 package br.gumn.application.bean;
 
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,19 +33,19 @@ public class ResearchLine {
 
 	private String title;
 
-	@ManyToMany(mappedBy = "researchLines")
+	@ManyToMany(mappedBy = "researchLines", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("name")
 	private Set<Project> projects;
 
-	@ManyToMany(mappedBy = "researchLines")
+	@ManyToMany(mappedBy = "researchLines", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("date")
 	private Set<Publication> publications;
 
-	@ManyToMany(mappedBy = "researchLines")
+	@ManyToMany(mappedBy = "researchLines", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("name")
 	private Set<Researcher> researchers;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("name")
 	@JoinTable(name = "ResearchLine_Team", schema = "reman", joinColumns = @JoinColumn(name = "id_ResearchLine"), inverseJoinColumns = @JoinColumn(name = "id_Team"))
 	private Set<Team> teams;
