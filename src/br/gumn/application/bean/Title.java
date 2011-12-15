@@ -35,15 +35,15 @@ public class Title {
 	@Enumerated(EnumType.STRING)
 	private Degree degree;
 
-	@ManyToOne(optional = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(optional = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_Department", insertable = true, updatable = true)
 	private Department department;
 
-	@ManyToOne(optional = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(optional = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_Researcher", insertable = true, updatable = true)
 	private Researcher researcher;
 
-	@ManyToOne(optional = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(optional = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_Advisor", insertable = true, updatable = true)
 	private Researcher advisor;
 

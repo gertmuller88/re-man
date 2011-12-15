@@ -52,33 +52,33 @@ public class Publication {
 	@Enumerated(EnumType.STRING)
 	private PublicationType type;
 
-	@OneToOne(optional = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(optional = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_Address", insertable = true, updatable = true)
 	private Address local;
 
-	@OneToOne(optional = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(optional = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_Link", insertable = true, updatable = true)
 	private Link doi;
 
-	@ManyToMany(mappedBy = "publications")
+	@ManyToMany(mappedBy = "publications", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("name")
 	private Set<Department> departments;
 
-	@ManyToMany(mappedBy = "publications")
+	@ManyToMany(mappedBy = "publications", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("name")
 	private Set<Project> projects;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("name")
 	@JoinTable(name = "Publication_Researcher", schema = "reman", joinColumns = @JoinColumn(name = "id_Publication"), inverseJoinColumns = @JoinColumn(name = "id_Researcher"))
 	private Set<Researcher> authors;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("title")
 	@JoinTable(name = "Publication_ResearchLine", schema = "reman", joinColumns = @JoinColumn(name = "id_Publication"), inverseJoinColumns = @JoinColumn(name = "id_ResearchLine"))
 	private Set<ResearchLine> researchLines;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("name")
 	@JoinTable(name = "Publication_Team", schema = "reman", joinColumns = @JoinColumn(name = "id_Publication"), inverseJoinColumns = @JoinColumn(name = "id_Team"))
 	private Set<Team> teams;

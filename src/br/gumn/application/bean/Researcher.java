@@ -47,49 +47,49 @@ public class Researcher {
 	@Enumerated(EnumType.STRING)
 	private Degree degree;
 
-	@OneToOne(optional = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(optional = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_Address", insertable = true, updatable = true)
 	private Address address;
 
-	@OneToOne(optional = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(optional = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_User", insertable = true, updatable = true)
 	private User user;
 
-	@ManyToMany(mappedBy = "members")
+	@ManyToMany(mappedBy = "members", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("name")
 	private Set<Department> departments;
 
-	@ManyToMany(mappedBy = "members")
+	@ManyToMany(mappedBy = "members", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("name")
 	private Set<Project> projects;
 
-	@ManyToMany(mappedBy = "authors")
+	@ManyToMany(mappedBy = "authors", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("date")
 	private Set<Publication> publications;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("title")
 	@JoinTable(name = "Researcher_ResearchLine", schema = "reman", joinColumns = @JoinColumn(name = "id_Researcher"), inverseJoinColumns = @JoinColumn(name = "id_ResearchLine"))
 	private Set<ResearchLine> researchLines;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("name")
 	@JoinTable(name = "Researcher_Team", schema = "reman", joinColumns = @JoinColumn(name = "id_Researcher"), inverseJoinColumns = @JoinColumn(name = "id_Team"))
 	private Set<Team> teams;
 
-	@OneToMany(mappedBy = "researcher")
+	@OneToMany(mappedBy = "researcher", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("date")
 	private Set<Association> associations;
 
-	@OneToMany(mappedBy = "researcher")
+	@OneToMany(mappedBy = "researcher", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("title")
 	private Set<Link> links;
 
-	@OneToMany(mappedBy = "advisor")
+	@OneToMany(mappedBy = "advisor", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("date")
 	private Set<Title> supervisionedTitles;
 
-	@OneToMany(mappedBy = "researcher")
+	@OneToMany(mappedBy = "researcher", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("date")
 	private Set<Title> titles;
 

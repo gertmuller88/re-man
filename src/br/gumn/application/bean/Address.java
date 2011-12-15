@@ -1,6 +1,8 @@
 package br.gumn.application.bean;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,13 +35,13 @@ public class Address {
 
 	private String zipCode;
 
-	@OneToOne(mappedBy = "address")
+	@OneToOne(mappedBy = "address", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Department department;
 
-	@OneToOne(mappedBy = "local")
+	@OneToOne(mappedBy = "local", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Publication publication;
 
-	@OneToOne(mappedBy = "address")
+	@OneToOne(mappedBy = "address", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Researcher researcher;
 
 	/**

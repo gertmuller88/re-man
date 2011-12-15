@@ -2,10 +2,12 @@ package br.gumn.application.bean;
 
 import java.io.File;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,23 +41,23 @@ public class Team {
 	@Column(name = "Activity")
 	private Set<String> activities;
 
-	@ManyToMany(mappedBy = "teams")
+	@ManyToMany(mappedBy = "teams", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("name")
 	private Set<Department> departments;
 
-	@ManyToMany(mappedBy = "teams")
+	@ManyToMany(mappedBy = "teams", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("name")
 	private Set<Project> projects;
 
-	@ManyToMany(mappedBy = "teams")
+	@ManyToMany(mappedBy = "teams", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("date")
 	private Set<Publication> publications;
 
-	@ManyToMany(mappedBy = "teams")
+	@ManyToMany(mappedBy = "teams", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("name")
 	private Set<Researcher> members;
 
-	@ManyToMany(mappedBy = "teams")
+	@ManyToMany(mappedBy = "teams", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy("title")
 	private Set<ResearchLine> researchLines;
 

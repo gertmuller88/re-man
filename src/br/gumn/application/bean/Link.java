@@ -31,13 +31,13 @@ public class Link {
 
 	private String url;
 
-	@OneToOne(mappedBy = "site")
+	@OneToOne(mappedBy = "site", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Department department;
 
-	@OneToOne(mappedBy = "doi")
+	@OneToOne(mappedBy = "doi", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Publication publication;
 
-	@ManyToOne(optional = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(optional = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_Researcher", insertable = true, updatable = true)
 	private Researcher researcher;
 
